@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.WebApp", "NgGlobal.WebApp.csproj", "{3A250134-A8F4-497B-AA12-7CE28E49C51B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.WebApp", "src\NgGlobal.WebApp\NgGlobal.WebApp.csproj", "{3A250134-A8F4-497B-AA12-7CE28E49C51B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.DatabaseEntity", "..\NgGlobal.DatabaseEntity\NgGlobal.DatabaseEntity.csproj", "{28D9509C-AC41-40FC-B349-1E16309034B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.DatabaseEntity", "src\NgGlobal.DatabaseEntity\NgGlobal.DatabaseEntity.csproj", "{28D9509C-AC41-40FC-B349-1E16309034B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.DatabaseModels", "..\NgGlobal.DatabaseModels\NgGlobal.DatabaseModels.csproj", "{A3889D8C-4228-4710-938E-F3F7A01EA694}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.DatabaseModels", "src\NgGlobal.DatabaseModels\NgGlobal.DatabaseModels.csproj", "{A3889D8C-4228-4710-938E-F3F7A01EA694}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.CoreServices", "..\NgGlobal.CoreServices\NgGlobal.CoreServices.csproj", "{E7C37160-56F6-4B77-B933-DAE87CE6A4FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.CoreServices", "src\NgGlobal.CoreServices\NgGlobal.CoreServices.csproj", "{E7C37160-56F6-4B77-B933-DAE87CE6A4FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.ApplicationShared", "..\NgGlobal.ApplicationShared\NgGlobal.ApplicationShared.csproj", "{18D2FEC3-027B-4BED-93F5-40FFA39FA3FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.ApplicationShared", "src\NgGlobal.ApplicationShared\NgGlobal.ApplicationShared.csproj", "{18D2FEC3-027B-4BED-93F5-40FFA39FA3FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.ApplicationServices", "..\NgGlobal.ApplicationServices\NgGlobal.ApplicationServices.csproj", "{C389B583-5692-4D73-A2A3-66A9891FFD6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgGlobal.ApplicationServices", "src\NgGlobal.ApplicationServices\NgGlobal.ApplicationServices.csproj", "{C389B583-5692-4D73-A2A3-66A9891FFD6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

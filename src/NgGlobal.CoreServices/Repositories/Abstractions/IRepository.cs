@@ -17,6 +17,9 @@ namespace NgGlobal.CoreServices.Repositories.Abstractions
         Task<IEnumerable<T>> GetAllAsync(List<Expression<Func<T, object>>> includes);
         Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter = null, List<Expression<Func<T, object>>> includes=null);
         Task<T> GetOneAsync(Expression<Func<T, bool>> filter = null, List<Expression<Func<T, object>>> includes=null);
+        Task<IEnumerable<T>> GetAllAsync(List<string> includes);
+        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter = null, List<string> includes = null);
+        Task<T> GetOneAsync(Expression<Func<T, bool>> filter = null, List<string> includes = null);
         Task<bool> SaveAsync();
     }
 }

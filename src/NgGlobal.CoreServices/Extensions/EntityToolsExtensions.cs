@@ -19,5 +19,16 @@ namespace NgGlobal.CoreServices.Extensions
 
             return queryable;
         }
+
+        public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<string> includes) where T : BaseEntity
+        {
+            foreach (var include in includes)
+            {
+                queryable = queryable.Include(include);
+            }
+
+
+            return queryable;
+        }
     }
 }

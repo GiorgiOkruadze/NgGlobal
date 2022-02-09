@@ -5,21 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="CloudinaryDotNet" Version="1.17.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.14" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Car\" />
     <Folder Include="Commands\DailyService\" />
     <Folder Include="Commands\OurService\" />
-    <Folder Include="Handlers\Car\" />
     <Folder Include="Handlers\DailyService\" />
     <Folder Include="Handlers\OurService\" />
-    <Folder Include="Queries\Car\" />
     <Folder Include="Queries\DailyService\" />
     <Folder Include="Queries\OurService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NgGlobal.ApplicationShared\NgGlobal.ApplicationShared.csproj" />
+    <ProjectReference Include="..\NgGlobal.CoreServices\NgGlobal.CoreServices.csproj" />
   </ItemGroup>
 
 </Project>

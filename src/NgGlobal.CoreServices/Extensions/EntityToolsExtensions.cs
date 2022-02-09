@@ -13,7 +13,7 @@ namespace NgGlobal.CoreServices.Extensions
         {
             foreach (var include in includes)
             {
-                    queryable = queryable.Include(include);
+                queryable = queryable.Include(include);
             }
 
 

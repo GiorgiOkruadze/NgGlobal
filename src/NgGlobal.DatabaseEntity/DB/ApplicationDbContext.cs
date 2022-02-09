@@ -22,6 +22,11 @@ namespace NgGlobal.DatabaseEntity.DB
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Language>()
+                .HasData(new Language() { Id=1 ,LanguageCode = "en" },
+                    new Language() { Id = 2, LanguageCode = "ka" });
+
+
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             base.OnModelCreating(builder);
         }

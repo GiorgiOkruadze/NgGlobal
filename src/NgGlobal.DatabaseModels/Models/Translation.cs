@@ -8,7 +8,7 @@ namespace NgGlobal.DatabaseModels.Models
 {
     public class Translation:BaseEntity
     {
-        public int TranslationKey { get;set; }
+        public int? TranslationKey { get;set; }
         public int LanguageId { get; set; }
         public Language Language { get; set; }
         public string Text { get; set; }

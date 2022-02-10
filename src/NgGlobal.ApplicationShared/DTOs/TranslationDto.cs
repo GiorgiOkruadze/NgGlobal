@@ -8,7 +8,7 @@ namespace NgGlobal.ApplicationShared.DTOs
 {
     public class TranslationDto
     {
-        public int TranslationKey { get; set; }
+        public int? TranslationKey { get; set; }
         public int LanguageId { get; set; }
         public string LanguageCode { get; set; }
         public string Text { get; set; }

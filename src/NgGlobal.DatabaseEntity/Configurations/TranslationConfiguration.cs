@@ -9,7 +9,7 @@ namespace NgGlobal.DatabaseEntity.Configurations
         public void Configure(EntityTypeBuilder<Translation> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.ToTable("translations");
+            builder.ToTable("Translations");
 
             builder.HasOne(tr => tr.Language)
                 .WithMany()

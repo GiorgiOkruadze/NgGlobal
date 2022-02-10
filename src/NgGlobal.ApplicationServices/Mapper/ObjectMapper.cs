@@ -23,14 +23,14 @@ namespace NgGlobal.ApplicationServices.Mapper
                 .ForMember(dt => dt.DriveTrainTranslations, db => db.MapFrom(o => o.DriveTrainTranslations))
                 .ForMember(dt => dt.FuelTypeTranslations, db => db.MapFrom(o => o.FuelTypeTranslations))
                 .ForMember(dt => dt.TransmissionTranslations, db => db.MapFrom(o => o.TransmissionTranslations))
-                .ForMember(dt => dt.Images, db => db.MapFrom(o => o.Images.Select(img => $"/{img.ImageName}")))
+                .ForMember(dt => dt.Images, db => db.MapFrom(o => o.Images.Select(img => img)))
                 .ReverseMap();
 
             CreateMap<Car, CreateCarCommand>()
                .ForMember(dt => dt.DriveTrainTranslations, db => db.MapFrom(o => o.DriveTrainTranslations))
                .ForMember(dt => dt.FuelTypeTranslations, db => db.MapFrom(o => o.FuelTypeTranslations))
                .ForMember(dt => dt.TransmissionTranslations, db => db.MapFrom(o => o.TransmissionTranslations))
-               .ForMember(dt => dt.Images, db => db.MapFrom(o => o.Images.Select(img => img.ImageName)))
+               .ForMember(dt => dt.Images, db => db.MapFrom(o => o.Images.Select(img => img)))
                .ReverseMap();
 
             CreateMap<Car, UpdateCarCommand>()

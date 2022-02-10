@@ -14,8 +14,7 @@ namespace NgGlobal.DatabaseEntity.Configurations
 
             builder.HasMany(tr => tr.AddressTranslations)
                 .WithOne()
-                .HasForeignKey(tr => tr.TranslationKey)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(tr => tr.AddressId);
         }
     }
 }

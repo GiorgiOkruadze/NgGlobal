@@ -26,9 +26,8 @@ namespace NgGlobal.DatabaseEntity.DB
                 .HasData(new Language() { Id=1 ,LanguageCode = "en" },
                     new Language() { Id = 2, LanguageCode = "ka" });
 
-
-            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
     }
 }

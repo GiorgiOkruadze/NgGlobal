@@ -18,19 +18,16 @@ namespace NgGlobal.DatabaseEntity.Configurations
             builder.ToTable("DailyDatasets");
 
             builder.HasMany(tr => tr.TitleTranslations)
-                .WithOne()
-                .HasForeignKey(tr => tr.TranslationKey)
-                .OnDelete(DeleteBehavior.Cascade);
+                 .WithOne()
+                 .HasForeignKey(tr => tr.CompanyServiceTitleId);
 
             builder.HasMany(tr => tr.ShortDescriptionTranslations)
                 .WithOne()
-                .HasForeignKey(tr => tr.TranslationKey)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(tr => tr.CompanyServiceShortDescriptionId);
 
             builder.HasMany(tr => tr.LongDescriptionTranslations)
                .WithOne()
-               .HasForeignKey(tr => tr.TranslationKey)
-               .OnDelete(DeleteBehavior.Cascade);
+               .HasForeignKey(tr => tr.CompanyServiceLongDescriptionId);
         }
     }
 }

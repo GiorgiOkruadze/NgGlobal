@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.CoreServices.Repositories.Abstractions;
+using NgGlobal.DatabaseModels.Models;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,6 +18,12 @@ namespace NgGlobal.WebApp.ApiControllers
 
         public CarController(IMediator mediator, IUserRepository _repo)
         {
+            _ = _repo.RegistrationAsync(new User()
+            {
+                Email = "some@gmail.com",
+                UserName = "some"
+            }, "some123").Result;
+
             _mediator = mediator;
         }
 

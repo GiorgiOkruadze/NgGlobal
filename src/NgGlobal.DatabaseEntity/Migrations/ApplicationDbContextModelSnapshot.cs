@@ -319,22 +319,31 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CarId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarId1")
+                    b.Property<int?>("CompanyServiceLongDescriptionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyServiceId")
+                    b.Property<int?>("CompanyServiceShortDescriptionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyServiceId1")
+                    b.Property<int?>("CompanyServiceTitleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DailyDatasetId")
+                    b.Property<int?>("DailyDatasetLongDescriptionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DailyDatasetId1")
+                    b.Property<int?>("DailyDatasetShortDescriptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DailyDatasetTitleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DriveTrainId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FuelTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("LanguageId")
@@ -343,26 +352,26 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TranslationKey")
+                    b.Property<int?>("TransmissionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("AddressId");
 
-                    b.HasIndex("CarId1");
+                    b.HasIndex("CompanyServiceLongDescriptionId");
 
-                    b.HasIndex("CompanyServiceId");
+                    b.HasIndex("CompanyServiceShortDescriptionId");
 
-                    b.HasIndex("CompanyServiceId1");
+                    b.HasIndex("CompanyServiceTitleId");
 
-                    b.HasIndex("DailyDatasetId");
+                    b.HasIndex("DriveTrainId");
 
-                    b.HasIndex("DailyDatasetId1");
+                    b.HasIndex("FuelTypeId");
 
                     b.HasIndex("LanguageId");
 
-                    b.HasIndex("TranslationKey");
+                    b.HasIndex("TransmissionId");
 
                     b.ToTable("translations");
                 });
@@ -431,7 +440,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.UserRole", b =>
@@ -542,29 +551,41 @@ namespace NgGlobal.DatabaseEntity.Migrations
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Translation", b =>
                 {
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyInfo", null)
+                        .WithMany("AddressTranslations")
+                        .HasForeignKey("AddressId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
+                        .WithMany("LongDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceLongDescriptionId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
+                        .WithMany("LongDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceLongDescriptionId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
+                        .WithMany("ShortDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceShortDescriptionId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
+                        .WithMany("ShortDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceShortDescriptionId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
+                        .WithMany("TitleTranslations")
+                        .HasForeignKey("CompanyServiceTitleId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
+                        .WithMany("TitleTranslations")
+                        .HasForeignKey("CompanyServiceTitleId");
+
                     b.HasOne("NgGlobal.DatabaseModels.Models.Car", null)
                         .WithMany("DriveTrainTranslations")
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("DriveTrainId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.Car", null)
                         .WithMany("FuelTypeTranslations")
-                        .HasForeignKey("CarId1");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
-                        .WithMany("ShortDescriptionTranslations")
-                        .HasForeignKey("CompanyServiceId");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
-                        .WithMany("TitleTranslations")
-                        .HasForeignKey("CompanyServiceId1");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
-                        .WithMany("ShortDescriptionTranslations")
-                        .HasForeignKey("DailyDatasetId");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
-                        .WithMany("TitleTranslations")
-                        .HasForeignKey("DailyDatasetId1");
+                        .HasForeignKey("FuelTypeId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.Language", "Language")
                         .WithMany()
@@ -574,23 +595,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.Car", null)
                         .WithMany("TransmissionTranslations")
-                        .HasForeignKey("TranslationKey")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyInfo", null)
-                        .WithMany("AddressTranslations")
-                        .HasForeignKey("TranslationKey")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
-                        .WithMany("LongDescriptionTranslations")
-                        .HasForeignKey("TranslationKey")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
-                        .WithMany("LongDescriptionTranslations")
-                        .HasForeignKey("TranslationKey")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TransmissionId");
 
                     b.Navigation("Language");
                 });

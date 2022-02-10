@@ -19,18 +19,15 @@ namespace NgGlobal.DatabaseEntity.Configurations
 
             builder.HasMany(tr => tr.DriveTrainTranslations)
                 .WithOne()
-                .HasForeignKey(tr => tr.TranslationKey)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(tr => tr.DriveTrainId);
 
             builder.HasMany(tr => tr.FuelTypeTranslations)
                 .WithOne()
-                .HasForeignKey(tr => tr.TranslationKey)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(tr => tr.FuelTypeId);
 
             builder.HasMany(tr => tr.TransmissionTranslations)
                .WithOne()
-               .HasForeignKey(tr => tr.TranslationKey)
-               .OnDelete(DeleteBehavior.Cascade);
+               .HasForeignKey(tr => tr.TransmissionId);
 
             builder.HasMany(tr => tr.Images)
               .WithOne()

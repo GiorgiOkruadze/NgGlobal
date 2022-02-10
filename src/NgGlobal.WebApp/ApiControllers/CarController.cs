@@ -18,12 +18,6 @@ namespace NgGlobal.WebApp.ApiControllers
 
         public CarController(IMediator mediator, IUserRepository _repo)
         {
-            _ = _repo.RegistrationAsync(new User()
-            {
-                Email = "some@gmail.com",
-                UserName = "some"
-            }, "some123").Result;
-
             _mediator = mediator;
         }
 

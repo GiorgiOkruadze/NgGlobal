@@ -68,12 +68,12 @@ namespace NgGlobal.CoreServices.Repositories
 
         public async Task<T> GetOneAsync(Expression<Func<T, bool>> filter = null, List<Expression<Func<T, object>>> includes = null)
         {
-            return (await GetAsync(filter, includes)).FirstOrDefault();
+            return await _entity?.IncludeAll(includes).FirstOrDefaultAsync(filter);
         }
 
         public async Task<T> GetOneAsync(Expression<Func<T, bool>> filter = null, List<string> includes = null)
         {
-            return (await GetAsync(filter, includes)).FirstOrDefault();
+            return await _entity?.IncludeAll(includes).FirstOrDefaultAsync(filter);
         }
 
         public async Task<bool> SaveAsync()

@@ -12,8 +12,10 @@ namespace NgGlobal.ApplicationServices.Mapper
     {
         public ObjectMapper()
         {
+            CreateMap<Language, LanguageDto>().ReverseMap();
+
             CreateMap<Translation,TranslationDto>()
-                .ForMember(dt => dt.LanguageCode, db => db.MapFrom(o => o.Language.LanguageCode))
+                .ForMember(dt => dt.Language, db => db.MapFrom(o => o.Language))
                 .ReverseMap();
 
             CreateMap<Image, ImageDto>()
@@ -34,6 +36,7 @@ namespace NgGlobal.ApplicationServices.Mapper
                .ReverseMap();
 
             CreateMap<Car, UpdateCarCommand>()
+               .ForMember(dt => dt.CarId, db => db.MapFrom(o => o.Id))
                .ForMember(dt => dt.DriveTrainTranslations, db => db.MapFrom(o => o.DriveTrainTranslations))
                .ForMember(dt => dt.FuelTypeTranslations, db => db.MapFrom(o => o.FuelTypeTranslations))
                .ForMember(dt => dt.TransmissionTranslations, db => db.MapFrom(o => o.TransmissionTranslations))

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NgGlobal.ApplicationServices\NgGlobal.ApplicationServices.csproj" />
+    <ProjectReference Include="..\NgGlobal.ApplicationShared\NgGlobal.ApplicationShared.csproj" />
+    <ProjectReference Include="..\NgGlobal.CoreServices\NgGlobal.CoreServices.csproj" />
+    <ProjectReference Include="..\NgGlobal.DatabaseEntity\NgGlobal.DatabaseEntity.csproj" />
+    <ProjectReference Include="..\NgGlobal.DatabaseModels\NgGlobal.DatabaseModels.csproj" />
+  </ItemGroup>
+
+</Project>

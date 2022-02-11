@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NgGlobal.ApplicationServices.ConfigurationOptions;
+using NgGlobal.ApplicationServices.FileStorageService;
 using NgGlobal.ApplicationServices.Mapper;
 using NgGlobal.CoreServices.Repositories;
 using NgGlobal.CoreServices.Repositories.Abstractions;
@@ -64,15 +65,17 @@ namespace NgGlobal.WebApi
             });
             #endregion
 
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            services.Configure<ImageOption>(Configuration.GetSection("ImagesBaseUrl"));
-
             services.AddAutoMapper(typeof(ObjectMapper));
-
             services.AddMediatR(AppDomain.CurrentDomain.Load("NgGlobal.ApplicationServices"));
-          
+
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.Configure<ImageOption>(Configuration.GetSection("ImagesBaseUrl"));
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IMediaService, MediaService>();
 
         }
 

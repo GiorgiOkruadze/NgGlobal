@@ -19,7 +19,7 @@ namespace NgGlobal.WebApp.ApiControllers
         public CarController(IMediator mediator, IUserRepository _repo)
         {
             _mediator = mediator;
-          
+
         }
 
         // GET: api/<CarController>
@@ -41,26 +41,37 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCarCommand request)
         {
-            if(request == null) { return BadRequest(ModelState); }
+            if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
             return Ok(response)
-;        }
+;
+        }
 
         // PUT api/<CarController>/5
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCarCommand request)
         {
-            if(request == null) { return BadRequest(ModelState); }
+            if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
             return Ok(response)
-;        }
+;
+        }
 
         // DELETE api/<CarController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
+
+        [HttpPost(nameof(UploadCarImage))]
+        public async Task<IActionResult> UploadCarImage([FromForm] CreateImageForCarCommand command)
+        {
+            var result =await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
     }
 }

@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\DailyService\" />
     <Folder Include="Commands\OurService\" />
     <Folder Include="Handlers\OurService\" />
     <Folder Include="Queries\OurService\" />

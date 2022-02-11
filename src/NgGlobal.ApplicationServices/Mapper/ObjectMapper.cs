@@ -42,6 +42,12 @@ namespace NgGlobal.ApplicationServices.Mapper
                .ForMember(dt => dt.TransmissionTranslations, db => db.MapFrom(o => o.TransmissionTranslations))
                .ForMember(dt => dt.Images, db => db.MapFrom(o => o.Images.Select(img => img)))
                .ReverseMap();
+
+            CreateMap<DailyDataset, DailyDatasetDto>()
+              .ForMember(dt => dt.TitleTranslations, db => db.MapFrom(o => o.TitleTranslations))
+              .ForMember(dt => dt.ShortDescriptionTranslations, db => db.MapFrom(o => o.ShortDescriptionTranslations))
+              .ForMember(dt => dt.LongDescriptionTranslations, db => db.MapFrom(o => o.LongDescriptionTranslations))
+              .ReverseMap();
         }
     }
 }

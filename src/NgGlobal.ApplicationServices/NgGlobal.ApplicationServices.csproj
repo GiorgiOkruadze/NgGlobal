@@ -14,12 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\OurService\" />
-    <Folder Include="Handlers\OurService\" />
-    <Folder Include="Queries\OurService\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NgGlobal.ApplicationShared\NgGlobal.ApplicationShared.csproj" />
     <ProjectReference Include="..\NgGlobal.CoreServices\NgGlobal.CoreServices.csproj" />
   </ItemGroup>

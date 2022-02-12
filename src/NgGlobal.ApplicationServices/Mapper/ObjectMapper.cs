@@ -105,6 +105,9 @@ namespace NgGlobal.ApplicationServices.Mapper
 
             CreateMap<Contract, UpdateContractCommand>()
               .ReverseMap();
+
+            CreateMap<Mail, SentMailCommand>()
+              .ReverseMap();
         }
     }
 }

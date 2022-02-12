@@ -82,6 +82,7 @@ namespace NgGlobal.WebApi
 
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.Configure<MailOption>(Configuration.GetSection("MailSettings"));
             services.Configure<ImageOption>(Configuration.GetSection("ImagesBaseUrl"));
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 

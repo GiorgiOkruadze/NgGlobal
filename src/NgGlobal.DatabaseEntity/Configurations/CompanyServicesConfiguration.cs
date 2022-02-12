@@ -28,6 +28,8 @@ namespace NgGlobal.DatabaseEntity.Configurations
             builder.HasMany(tr => tr.LongDescriptionTranslations)
                .WithOne()
                .HasForeignKey(tr => tr.CompanyServiceLongDescriptionId);
+
+            builder.HasOne(i => i.Image).WithOne(i => i.CompanyService).HasForeignKey<CompanyServiceImage>(i => i.CompanyServiceId);
         }
     }
 }

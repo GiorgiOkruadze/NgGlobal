@@ -4,21 +4,20 @@ using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
+using NgGlobal.WebApi.Controllers;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NgGlobal.WebApp.ApiControllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CarController : ControllerBase
+   
+    public class CarController : BaseController
     {
-        private readonly IMediator _mediator = default;
+       
 
-        public CarController(IMediator mediator, IUserRepository _repo)
+        public CarController(IMediator mediator):base(mediator)
         {
-            _mediator = mediator;
 
         }
 

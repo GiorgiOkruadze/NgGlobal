@@ -14,7 +14,8 @@ namespace NgGlobal.DatabaseEntity.DB
         public DbSet<Image> Images { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<DailyDataset> DailyDataset { get; set; }
-
+        public DbSet<DailyDatasetImage> DailyDatasetImage { get; set; }
+        public DbSet<CompanyServiceImage> CompanyServiceImage { get; set; }
 
         public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }

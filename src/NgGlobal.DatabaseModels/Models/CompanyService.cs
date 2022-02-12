@@ -12,5 +12,6 @@ namespace NgGlobal.DatabaseModels.Models
         public List<Translation> TitleTranslations { get; set; }
         public List<Translation> ShortDescriptionTranslations { get; set; }
         public List<Translation> LongDescriptionTranslations { get; set;}
+        public CompanyServiceImage Image { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace NgGlobal.DatabaseEntity.Factory
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseSqlServer("Server=DESKTOP-9RUI2EA;Database=NgGlobal;Trusted_Connection=true;MultipleActiveResultSets=true;");
+                .UseSqlServer("Server=DESKTOP-SR6NHHL;Database=NgGlobal;Trusted_Connection=true;MultipleActiveResultSets=true;");
 
             return new ApplicationDbContext(options.Options);
         }

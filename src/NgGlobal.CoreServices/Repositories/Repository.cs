@@ -46,12 +46,12 @@ namespace NgGlobal.CoreServices.Repositories
             return _entity;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(List<Expression<Func<T, object>>> includes)
+        public async Task<IEnumerable<T>> GetAllAsync(List<Expression<Func<T, object>>> includes = null)
         {
             return await _entity.IncludeAll(includes).AsNoTracking().ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(List<string> includes)
+        public async Task<IEnumerable<T>> GetAllAsync(List<string> includes = null)
         {
             return await _entity.IncludeAll(includes).AsNoTracking().ToListAsync();
         }

@@ -18,8 +18,4 @@
     <ProjectReference Include="..\NgGlobal.CoreServices\NgGlobal.CoreServices.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\Contract\" />
-  </ItemGroup>
-
 </Project>

@@ -85,6 +85,18 @@ namespace NgGlobal.ApplicationServices.Mapper
               .ForMember(dt => dt.Image, db => db.MapFrom(o => o.Image))
               .ReverseMap();
 
+            CreateMap<CompanyInfo, CompanyInfoDto>()
+              .ForMember(dt => dt.AddressTranslations, db => db.MapFrom(o => o.AddressTranslations))
+              .ReverseMap();
+
+            CreateMap<CompanyInfo, CreateCompanyInfoCommand>()
+              .ForMember(dt => dt.AddressTranslations, db => db.MapFrom(o => o.AddressTranslations))
+              .ReverseMap();
+
+            CreateMap<CompanyInfo, UpdateCompanyInfoCommand>()
+              .ForMember(dt => dt.AddressTranslations, db => db.MapFrom(o => o.AddressTranslations))
+              .ReverseMap();
+
             CreateMap<Contract, ContractDto>()
               .ReverseMap();
 

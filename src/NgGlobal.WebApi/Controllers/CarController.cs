@@ -14,8 +14,6 @@ namespace NgGlobal.WebApp.ApiControllers
    
     public class CarController : BaseController
     {
-       
-
         public CarController(IMediator mediator):base(mediator)
         {
 

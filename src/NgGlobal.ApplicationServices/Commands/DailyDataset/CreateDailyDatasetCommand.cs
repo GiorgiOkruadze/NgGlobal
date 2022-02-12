@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using NgGlobal.ApplicationShared.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Commands
 {
@@ -14,5 +10,6 @@ namespace NgGlobal.ApplicationServices.Commands
         public List<TranslationDto> TitleTranslations { get; set; }
         public List<TranslationDto> ShortDescriptionTranslations { get; set; }
         public List<TranslationDto> LongDescriptionTranslations { get; set; }
+        public DailyDatasetImageDto Image { get; set; }
     }
 }

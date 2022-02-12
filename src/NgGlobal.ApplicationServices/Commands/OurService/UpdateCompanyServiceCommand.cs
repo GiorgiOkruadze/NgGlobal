@@ -11,5 +11,6 @@ namespace NgGlobal.ApplicationServices.Commands
         public List<TranslationDto> TitleTranslations { get; set; }
         public List<TranslationDto> ShortDescriptionTranslations { get; set; }
         public List<TranslationDto> LongDescriptionTranslations { get; set; }
+        public CompanyServiceImageDto Image { get; set; }
     }
 }

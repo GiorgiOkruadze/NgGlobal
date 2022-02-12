@@ -13,5 +13,6 @@ namespace NgGlobal.ApplicationShared.DTOs
         public List<TranslationDto> TitleTranslations { get; set; }
         public List<TranslationDto> ShortDescriptionTranslations { get; set; }
         public List<TranslationDto> LongDescriptionTranslations { get; set; }
+        public DailyDatasetImageDto Image { get; set; }
     }
 }

@@ -49,7 +49,7 @@ namespace NgGlobal.ApplicationServices.Handlers
                 message.From.Add(new MailboxAddress(model.Name, model.Email));
                 message.To.Add(new MailboxAddress("NgGLobal", "oqruadze1997@gmail.com"));
                 message.Subject = model.ReasonForEnquiry;
-                message.Body = new TextPart("plain") { Text = $"Message from : ${model.Name}, ${model.Message}" };
+                message.Body = new TextPart("plain") { Text = $"Sender phone : ${model.PhoneNumber}, ${model.Message}" };
 
                 using (SmtpClient client = new())
                 {

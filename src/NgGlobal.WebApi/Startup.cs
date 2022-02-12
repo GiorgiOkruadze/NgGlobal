@@ -74,7 +74,6 @@ namespace NgGlobal.WebApi
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
             services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddScoped<IMediaService, MediaService>();
 
         }

@@ -24,7 +24,7 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
-        [HttpPost("/api/car/filter")]
+        [HttpPost("/api/Car/Filter")]
         public async Task<IActionResult> FilterCars([FromBody]FilterCarsQuery request)
         {
             if (request == null) { return BadRequest(ModelState); }

@@ -23,10 +23,7 @@ using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseEntity.DB;
 using NgGlobal.DatabaseModels.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NgGlobal.WebApi
 {

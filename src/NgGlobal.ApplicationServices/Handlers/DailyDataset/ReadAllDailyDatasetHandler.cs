@@ -26,7 +26,9 @@ namespace NgGlobal.ApplicationServices.Handlers
 
         public async Task<List<DailyDatasetDto>> Handle(ReadAllDailyDatasetQuery request, CancellationToken cancellationToken)
         {
-            var dailyDatasets = await _dailyDatasetRepository.GetAllAsync(new List<string>()
+            try
+            {
+                var dailyDatasets = await _dailyDatasetRepository.GetAllAsync(new List<string>()
             {
                 "TitleTranslations",
                 "TitleTranslations.Language",
@@ -34,9 +36,15 @@ namespace NgGlobal.ApplicationServices.Handlers
                 "ShortDescriptionTranslations.Language",
                 "LongDescriptionTranslations",
                 "LongDescriptionTranslations.Language",
+                "Image"
             });
-            var mappedDailyDatasets = _mapper.Map<List<DailyDatasetDto>>(dailyDatasets);
-            return mappedDailyDatasets;
+                var mappedDailyDatasets = _mapper.Map<List<DailyDatasetDto>>(dailyDatasets);
+                return mappedDailyDatasets;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

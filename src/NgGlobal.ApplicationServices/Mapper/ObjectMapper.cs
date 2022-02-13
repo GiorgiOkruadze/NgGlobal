@@ -18,6 +18,9 @@ namespace NgGlobal.ApplicationServices.Mapper
                 .ForMember(dt => dt.Language, db => db.MapFrom(o => o.Language))
                 .ReverseMap();
 
+            CreateMap<DailyDatasetImage, DailyDatasetImageDto>().ReverseMap();
+            CreateMap<CompanyServiceImage, CompanyServiceImageDto>().ReverseMap();
+
             CreateMap<Image, ImageDto>()
                 .ReverseMap();
 
@@ -54,14 +57,12 @@ namespace NgGlobal.ApplicationServices.Mapper
               .ForMember(dt => dt.TitleTranslations, db => db.MapFrom(o => o.TitleTranslations))
               .ForMember(dt => dt.ShortDescriptionTranslations, db => db.MapFrom(o => o.ShortDescriptionTranslations))
               .ForMember(dt => dt.LongDescriptionTranslations, db => db.MapFrom(o => o.LongDescriptionTranslations))
-              .ForMember(dt => dt.Image, db => db.MapFrom(o => o.Image))
               .ReverseMap();
 
             CreateMap<DailyDataset, UpdateDailyDatasetCommand>()
               .ForMember(dt => dt.TitleTranslations, db => db.MapFrom(o => o.TitleTranslations))
               .ForMember(dt => dt.ShortDescriptionTranslations, db => db.MapFrom(o => o.ShortDescriptionTranslations))
               .ForMember(dt => dt.LongDescriptionTranslations, db => db.MapFrom(o => o.LongDescriptionTranslations))
-              .ForMember(dt => dt.Image, db => db.MapFrom(o => o.Image))
               .ReverseMap();
 
             CreateMap<CompanyService, CompanyServiceDto>()
@@ -75,14 +76,12 @@ namespace NgGlobal.ApplicationServices.Mapper
               .ForMember(dt => dt.TitleTranslations, db => db.MapFrom(o => o.TitleTranslations))
               .ForMember(dt => dt.ShortDescriptionTranslations, db => db.MapFrom(o => o.ShortDescriptionTranslations))
               .ForMember(dt => dt.LongDescriptionTranslations, db => db.MapFrom(o => o.LongDescriptionTranslations))
-              .ForMember(dt => dt.Image, db => db.MapFrom(o => o.Image))
               .ReverseMap();
 
             CreateMap<CompanyService, UpdateCompanyServiceCommand>()
               .ForMember(dt => dt.TitleTranslations, db => db.MapFrom(o => o.TitleTranslations))
               .ForMember(dt => dt.ShortDescriptionTranslations, db => db.MapFrom(o => o.ShortDescriptionTranslations))
               .ForMember(dt => dt.LongDescriptionTranslations, db => db.MapFrom(o => o.LongDescriptionTranslations))
-              .ForMember(dt => dt.Image, db => db.MapFrom(o => o.Image))
               .ReverseMap();
 
             CreateMap<CompanyInfo, CompanyInfoDto>()

@@ -31,6 +31,7 @@ namespace NgGlobal.ApplicationServices.Handlers
                 "ShortDescriptionTranslations.Language",
                 "LongDescriptionTranslations",
                 "LongDescriptionTranslations.Language",
+                "Image"
             });
             var mappedDailyDataset = _mapper.Map<DailyDatasetDto>(dailyDataset);
             return mappedDailyDataset;

@@ -34,6 +34,7 @@ namespace NgGlobal.ApplicationServices.Handlers
                 "ShortDescriptionTranslations.Language",
                 "LongDescriptionTranslations",
                 "LongDescriptionTranslations.Language",
+                "Image"
             });
             var mappedCompanyServices = _mapper.Map<List<CompanyServiceDto>>(companyServices);
             return mappedCompanyServices;

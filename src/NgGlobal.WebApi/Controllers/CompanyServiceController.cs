@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
+using NgGlobal.ApplicationServices.Extensions;
 using NgGlobal.ApplicationServices.Queries;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.WebApi.Controllers
 {
-  
+
     public class CompanyServiceController : BaseController
     {
         public CompanyServiceController(IMediator mediator) : base(mediator) { }
@@ -36,6 +37,7 @@ namespace NgGlobal.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
+            request.ImageFile = request.ImageName.Base64ToImage();
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
@@ -46,6 +48,7 @@ namespace NgGlobal.WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] UpdateCompanyServiceCommand request)
         {
+            request.Image = request.ImageName.Base64ToImage();
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
@@ -56,6 +59,7 @@ namespace NgGlobal.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+
             var response = await _mediator.Send(new DeleteCompanyServiceCommand() { DailyDatasetId = id });
             return Ok(response);
         }

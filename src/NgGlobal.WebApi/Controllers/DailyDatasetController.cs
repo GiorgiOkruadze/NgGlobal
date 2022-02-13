@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Extensions;
 using NgGlobal.ApplicationServices.Queries;
+using NgGlobal.WebApi.AuthorizeConstatnts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +19,7 @@ namespace NgGlobal.WebApi.Controllers
         public DailyDatasetController(IMediator mediator) : base(mediator) { }
 
         // GET: api/<CarController>
-        [HttpGet]
+        [HttpGet]       
         public async Task<IActionResult> Get()
         {
             var response = await _mediator.Send(new ReadAllDailyDatasetQuery());
@@ -34,9 +36,9 @@ namespace NgGlobal.WebApi.Controllers
 
 
 
-       
 
-        // POST api/<CompanyServiceController>
+
+        [Authorize(Roles = UserType.Admin)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateDailyDatasetCommand request)
         {
@@ -48,7 +50,7 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        // PUT api/<CompanyServiceController>/5
+        [Authorize(Roles = UserType.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromForm] UpdateDailyDatasetCommand request)
         {
@@ -59,7 +61,7 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        // DELETE api/<CompanyServiceController>/5
+        [Authorize(Roles = UserType.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

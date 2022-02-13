@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Extensions;
 using NgGlobal.ApplicationServices.Queries;
+using NgGlobal.WebApi.AuthorizeConstatnts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,7 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        // POST api/<CompanyServiceController>
+        [Authorize(Roles = UserType.Admin)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
@@ -44,8 +46,8 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        // PUT api/<CompanyServiceController>/5
-        [HttpPut("{id}")]
+        [Authorize(Roles = UserType.Admin)]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCompanyServiceCommand request)
         {
             request.Image = request.ImageName.Base64ToImage();
@@ -55,7 +57,7 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        // DELETE api/<CompanyServiceController>/5
+        [Authorize(Roles = UserType.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

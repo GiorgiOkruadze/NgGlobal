@@ -5,6 +5,6 @@ namespace NgGlobal.ApplicationServices.Queries
 {
     public class ReadCompanyServiceByIdQuery : IRequest<CompanyServiceDto> 
     { 
-        public int DailyDatasetId { get; set; }
+        public int CompanyServiceId { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace NgGlobal.ApplicationServices.Handlers
 
         public async Task<CompanyServiceDto> Handle(ReadCompanyServiceByIdQuery request, CancellationToken cancellationToken)
         {
-            var companyService = await _companyServiceRepository.GetOneAsync(o => o.Id == request.DailyDatasetId,new List<string>()
+            var companyService = await _companyServiceRepository.GetOneAsync(o => o.Id == request.CompanyServiceId,new List<string>()
             {
                 "TitleTranslations",
                 "TitleTranslations.Language",

@@ -2,25 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NgGlobal.WebApi.Controllers
 {
-  
-    public class CompanyServiceController : BaseController
+    public class CompanyInfoController : BaseController
     {
-        public CompanyServiceController(IMediator mediator) : base(mediator) { }
+        public CompanyInfoController(IMediator mediator) : base(mediator) { }
 
         // GET: api/<CarController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = await _mediator.Send(new ReadAllCompanyServicesQuery());
+            var response = await _mediator.Send(new RealAllCompanyInfoQuery());
             return Ok(response);
         }
 
@@ -28,13 +22,13 @@ namespace NgGlobal.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var response = await _mediator.Send(new ReadCompanyServiceByIdQuery() { CompanyServiceId = id });
+            var response = await _mediator.Send(new ReadCompanyInfoByIdQuery(){ CompanyInfoId = id});
             return Ok(response);
         }
 
         // POST api/<CompanyServiceController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
+        public async Task<IActionResult> Post([FromBody] CreateCompanyInfoCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
 
@@ -44,7 +38,7 @@ namespace NgGlobal.WebApi.Controllers
 
         // PUT api/<CompanyServiceController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] UpdateCompanyServiceCommand request)
+        public async Task<IActionResult> Put([FromBody] UpdateCompanyInfoCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
 
@@ -56,7 +50,7 @@ namespace NgGlobal.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _mediator.Send(new DeleteCompanyServiceCommand() { DailyDatasetId = id });
+            var response = await _mediator.Send(new DeleteCompanyInfoCommand() { CompanyInfoId = id });
             return Ok(response);
         }
     }

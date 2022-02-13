@@ -8,9 +8,6 @@ using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

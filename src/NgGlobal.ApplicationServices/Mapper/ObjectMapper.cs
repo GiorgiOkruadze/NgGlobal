@@ -108,6 +108,9 @@ namespace NgGlobal.ApplicationServices.Mapper
 
             CreateMap<Mail, SentMailCommand>()
               .ReverseMap();
+
+            CreateMap<Mail, SetMailAboutCarCommand>()
+              .ReverseMap();
         }
     }
 }

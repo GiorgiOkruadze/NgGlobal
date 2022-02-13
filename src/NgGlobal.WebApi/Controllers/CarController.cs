@@ -24,6 +24,15 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        [HttpPost("/api/car/filter")]
+        public async Task<IActionResult> FilterCars([FromBody]FilterCarsQuery request)
+        {
+            if (request == null) { return BadRequest(ModelState); }
+
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
         // GET api/<CarController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)

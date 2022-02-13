@@ -1,16 +1,12 @@
-using AutoMapper.Internal.Mappers;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NgGlobal.ApplicationServices.Authentication.Abstraction;
@@ -86,6 +82,7 @@ namespace NgGlobal.WebApi
 
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.Configure<MailOption>(Configuration.GetSection("MailSettings"));
             services.Configure<ImageOption>(Configuration.GetSection("ImagesBaseUrl"));
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
@@ -116,8 +113,7 @@ namespace NgGlobal.WebApi
                                     Id = "Bearer"
                                 }
                             },
-                            new string[] {}
-
+                            Array.Empty<string>()
                     }
                 });
             });

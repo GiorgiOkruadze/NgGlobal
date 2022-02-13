@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
-using NgGlobal.CoreServices.Repositories.Abstractions;
-using NgGlobal.DatabaseModels.Models;
 using NgGlobal.WebApi.Controllers;
 using System.Threading.Tasks;
 
@@ -14,12 +12,7 @@ namespace NgGlobal.WebApp.ApiControllers
    
     public class CarController : BaseController
     {
-       
-
-        public CarController(IMediator mediator):base(mediator)
-        {
-
-        }
+        public CarController(IMediator mediator) : base(mediator) { }
 
         // GET: api/<CarController>
         [HttpGet]
@@ -31,9 +24,10 @@ namespace NgGlobal.WebApp.ApiControllers
 
         // GET api/<CarController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            var response = await _mediator.Send(new ReadCarByIdQuery() { CarId = id});
+            return Ok(response);
         }
 
         // POST api/<CarController>
@@ -43,8 +37,7 @@ namespace NgGlobal.WebApp.ApiControllers
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
-            return Ok(response)
-;
+            return Ok(response);
         }
 
         // PUT api/<CarController>/5
@@ -60,8 +53,10 @@ namespace NgGlobal.WebApp.ApiControllers
 
         // DELETE api/<CarController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var response = await _mediator.Send(new DeleteCarCommand() { CarId = id });
+            return Ok(response);
         }
 
         [HttpPost(nameof(UploadCarImage))]

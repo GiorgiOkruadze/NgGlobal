@@ -11,9 +11,12 @@ namespace NgGlobal.CoreServices.Extensions
     {
         public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<Expression<Func<T, object>>> includes) where T : BaseEntity
         {
-            foreach (var include in includes)
+            if(includes != null)
             {
-                queryable = queryable.Include(include);
+                foreach (var include in includes)
+                {
+                    queryable = queryable.Include(include);
+                }
             }
 
 
@@ -22,9 +25,12 @@ namespace NgGlobal.CoreServices.Extensions
 
         public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<string> includes) where T : BaseEntity
         {
-            foreach (var include in includes)
+            if (includes != null)
             {
-                queryable = queryable.Include(include);
+                foreach (var include in includes)
+                {
+                    queryable = queryable.Include(include);
+                }
             }
 
 

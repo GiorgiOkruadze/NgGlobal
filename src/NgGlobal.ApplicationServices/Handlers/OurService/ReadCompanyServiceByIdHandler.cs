@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Handlers
 {
-    public class ReadCompanyServiceByIdHandler : IRequestHandler<ReadCompanySederviceByIdQuery, CompanyServiceDto>
+    public class ReadCompanyServiceByIdHandler : IRequestHandler<ReadCompanyServiceByIdQuery, CompanyServiceDto>
     {
         private readonly IMapper _mapper;
         private readonly IRepository<CompanyService> _companyServiceRepository = default;
@@ -21,9 +21,9 @@ namespace NgGlobal.ApplicationServices.Handlers
             _companyServiceRepository = companyServiceRepository;
         }
 
-        public async Task<CompanyServiceDto> Handle(ReadCompanySederviceByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CompanyServiceDto> Handle(ReadCompanyServiceByIdQuery request, CancellationToken cancellationToken)
         {
-            var companyService = await _companyServiceRepository.GetOneAsync(o => o.Id == request.DailyDatasetId,new List<string>()
+            var companyService = await _companyServiceRepository.GetOneAsync(o => o.Id == request.CompanyServiceId,new List<string>()
             {
                 "TitleTranslations",
                 "TitleTranslations.Language",

@@ -37,7 +37,6 @@ namespace NgGlobal.WebApi.Controllers
 
         /*[Authorize(Roles = UserType.Admin)]*/
         [HttpPost]
-        [Authorize(Roles = UserType.Admin)]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
             request.ImageFile = request.ImageBaseUrl.Base64ToImage();

@@ -77,14 +77,13 @@ namespace NgGlobal.WebApi
                 (new JwtAuthenticationManager(Configuration.GetSection("JwtToken").Value));
             #endregion
 
-            services.AddAutoMapper(typeof(ObjectMapper));
-            services.AddMediatR(AppDomain.CurrentDomain.Load("NgGlobal.ApplicationServices"));
-
-
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.Configure<MailOption>(Configuration.GetSection("MailSettings"));
             services.Configure<ImageOption>(Configuration.GetSection("ImagesBaseUrl"));
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
+            services.AddAutoMapper(typeof(ObjectMapper));
+            services.AddMediatR(AppDomain.CurrentDomain.Load("NgGlobal.ApplicationServices"));
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMediaService, MediaService>();
@@ -132,9 +131,12 @@ namespace NgGlobal.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NgGlobal.WebApi v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "NgGlobal.WebApi v1");
+            });
 
             app.UseHttpsRedirection();
 

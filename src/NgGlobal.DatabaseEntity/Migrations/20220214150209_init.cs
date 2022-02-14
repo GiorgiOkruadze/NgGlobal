@@ -458,8 +458,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "907696f2-3753-446b-9da3-723995dda4c4", "admin", "ADMIN" },
-                    { 2, "3da8902b-29a7-425b-a330-9390a9269427", "customer", "CUSTOMER" }
+                    { 1, "a9bb1054-6004-48fb-8c27-a8b469f739a4", "Admin", "ADMIN" },
+                    { 2, "ca71f879-b40e-4448-98e8-30d1f2a918d9", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -474,7 +474,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "f50f5de7-ac08-4e82-ab56-d2ff0b37028f", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEKprzTovC+HVVqlVeUZiZYi0DQknVaAEBZPe/XW4yQhCk/hAG1V3c+Zr1v0xF8kCPg==", null, false, "", false, "admin" });
+                values: new object[] { 1, 0, "cd98010b-266f-4f31-b725-a1c87cfcb345", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEIU5LCMzhMZ39wnaOgLqRpRMW9Xz+0ctRmXoXRXK3Ull92OGREgKXaUIo9fQ0hIGdQ==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

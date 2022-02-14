@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.WebApi.Controllers
 {
-
     public class CompanyServiceController : BaseController
     {
         public CompanyServiceController(IMediator mediator) : base(mediator) { }

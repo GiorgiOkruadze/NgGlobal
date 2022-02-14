@@ -33,12 +33,12 @@ namespace NgGlobal.DatabaseEntity.DB
             builder.Entity<UserRole>().HasData(new UserRole
             {
                 Id = 1,
-                Name = "admin",
+                Name = "Admin",
                 NormalizedName = "ADMIN"
             }, new UserRole()
             {
                 Id = 2,
-                Name = "customer",
+                Name = "Customer",
                 NormalizedName = "CUSTOMER"
             });
 

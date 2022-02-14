@@ -10,7 +10,7 @@ using NgGlobal.DatabaseEntity.DB;
 namespace NgGlobal.DatabaseEntity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220214105607_init")]
+    [Migration("20220214133548_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,13 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -560,6 +567,24 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f50f5de7-ac08-4e82-ab56-d2ff0b37028f",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "admin",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKprzTovC+HVVqlVeUZiZYi0DQknVaAEBZPe/XW4yQhCk/hAG1V3c+Zr1v0xF8kCPg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.UserRole", b =>
@@ -589,6 +614,22 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "907696f2-3753-446b-9da3-723995dda4c4",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "3da8902b-29a7-425b-a330-9390a9269427",
+                            Name = "customer",
+                            NormalizedName = "CUSTOMER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

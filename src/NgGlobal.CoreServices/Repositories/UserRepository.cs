@@ -29,10 +29,10 @@ namespace NgGlobal.CoreServices.Repositories.Abstractions
             return result.Succeeded;
         }
 
-        public async Task<bool> RegistrationAsync(User item,string password)
+        public async Task<int> RegistrationAsync(User item,string password)
         {
             var result = await _userManager.CreateAsync(item, password);
-            return result.Succeeded;
+            return item.Id;
         }
     }
 }

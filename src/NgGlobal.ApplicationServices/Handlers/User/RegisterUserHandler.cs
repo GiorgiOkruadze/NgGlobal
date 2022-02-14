@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Handlers
 {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, bool>
+    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, int>
     {
         private readonly IUserRepository _userRepository = default;
         private readonly UserManager<User> _userManager;
@@ -19,7 +19,7 @@ namespace NgGlobal.ApplicationServices.Handlers
             _userManager = userManager;
         }
 
-        public async Task<bool> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User()
             {

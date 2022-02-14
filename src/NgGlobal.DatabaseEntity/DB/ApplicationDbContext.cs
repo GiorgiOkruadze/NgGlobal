@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NgGlobal.DatabaseModels.Models;
 
@@ -28,6 +29,39 @@ namespace NgGlobal.DatabaseEntity.DB
             builder.Entity<Language>()
                 .HasData(new Language() { Id=1 ,LanguageCode = "en" },
                     new Language() { Id = 2, LanguageCode = "ka" });
+
+            builder.Entity<UserRole>().HasData(new UserRole
+            {
+                Id = 1,
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            }, new UserRole()
+            {
+                Id = 2,
+                Name = "customer",
+                NormalizedName = "CUSTOMER"
+            });
+
+            var hasher = new PasswordHasher<User>();
+            var user = new User
+            {
+                Id = 1,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "admin@gmail.com",
+                PasswordHash = hasher.HashPassword(null, "Admin!@#123"),
+                NormalizedEmail = "admin@gmail.com".ToUpper(),
+                EmailConfirmed=true,
+                SecurityStamp = string.Empty
+            };
+            user.PasswordHash = hasher.HashPassword(user, "Admin!@#123.");
+            builder.Entity<User>().HasData(user);
+
+            builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
+            {
+                RoleId = 1,
+                UserId = 1
+            });
 
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);

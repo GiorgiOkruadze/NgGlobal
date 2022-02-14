@@ -454,14 +454,32 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Languages",
-                columns: new[] { "Id", "LanguageCode" },
-                values: new object[] { 1, "en" });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "907696f2-3753-446b-9da3-723995dda4c4", "admin", "ADMIN" },
+                    { 2, "3da8902b-29a7-425b-a330-9390a9269427", "customer", "CUSTOMER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Languages",
                 columns: new[] { "Id", "LanguageCode" },
-                values: new object[] { 2, "ka" });
+                values: new object[,]
+                {
+                    { 1, "en" },
+                    { 2, "ka" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "f50f5de7-ac08-4e82-ab56-d2ff0b37028f", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEKprzTovC+HVVqlVeUZiZYi0DQknVaAEBZPe/XW4yQhCk/hAG1V3c+Zr1v0xF8kCPg==", null, false, "", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

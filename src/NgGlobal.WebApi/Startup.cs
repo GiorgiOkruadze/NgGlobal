@@ -89,6 +89,14 @@ namespace NgGlobal.WebApi
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMediaService, MediaService>();
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowCredentials()
+                       .AllowAnyHeader();
+            }));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -132,6 +140,8 @@ namespace NgGlobal.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();

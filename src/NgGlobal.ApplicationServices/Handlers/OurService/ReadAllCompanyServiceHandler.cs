@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.ApplicationShared.DTOs;
 using NgGlobal.CoreServices.Repositories.Abstractions;
@@ -16,11 +17,13 @@ namespace NgGlobal.ApplicationServices.Handlers
     internal class ReadAllCompanyServiceHandler : IRequestHandler<ReadAllCompanyServicesQuery, List<CompanyServiceDto>>
     {
         private readonly IMapper _mapper;
+        private readonly ImageOption _imageOption = default;
         private readonly IRepository<CompanyService> _companyServiceRepository = default;
 
-        public ReadAllCompanyServiceHandler(IMapper mapper, IRepository<CompanyService> companyServiceRepository)
+        public ReadAllCompanyServiceHandler(IMapper mapper, ImageOption imageOption, IRepository<CompanyService> companyServiceRepository)
         {
             _mapper = mapper;
+            _imageOption = imageOption;
             _companyServiceRepository = companyServiceRepository;
         }
 
@@ -37,6 +40,10 @@ namespace NgGlobal.ApplicationServices.Handlers
                 "Image"
             });
             var mappedCompanyServices = _mapper.Map<List<CompanyServiceDto>>(companyServices);
+            mappedCompanyServices.ForEach(item =>
+            {
+                item.ImageName = _imageOption.Url + item.Image.ImageUrl;
+            });
             return mappedCompanyServices;
         }
     }

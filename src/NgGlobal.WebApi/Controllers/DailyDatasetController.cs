@@ -52,7 +52,7 @@ namespace NgGlobal.WebApi.Controllers
 
         [Authorize(Roles = UserType.Admin)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromForm] UpdateDailyDatasetCommand request)
+        public async Task<IActionResult> Put([FromBody] UpdateDailyDatasetCommand request)
         {
             request.Image = request.ImageBaseUrl.Base64ToImage();
             if (request == null) { return BadRequest(ModelState); }

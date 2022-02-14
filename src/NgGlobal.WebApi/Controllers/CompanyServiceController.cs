@@ -21,6 +21,7 @@ namespace NgGlobal.WebApi.Controllers
 
         // GET: api/<CarController>
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Get()
         {
             var response = await _mediator.Send(new ReadAllCompanyServicesQuery());
@@ -37,7 +38,7 @@ namespace NgGlobal.WebApi.Controllers
 
         /*[Authorize(Roles = UserType.Admin)]*/
         [HttpPost]
-        [Authorize(Roles = UserType.Admin)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
             request.ImageFile = request.ImageBaseUrl.Base64ToImage();

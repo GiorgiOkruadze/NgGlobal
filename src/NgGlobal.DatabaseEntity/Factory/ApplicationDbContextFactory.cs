@@ -15,7 +15,7 @@ namespace NgGlobal.DatabaseEntity.Factory
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseSqlServer("Server=GIORGIOKRUADZE;Database=NgGlobal;Trusted_Connection=true;MultipleActiveResultSets=true;");
+                .UseSqlServer("Server=tcp:ngglobaldb.database.windows.net,1433;Initial Catalog=ngglobal;Persist Security Info=False;User ID=ngglobal;Password=Labolggn!@12;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=330;");
 
             return new ApplicationDbContext(options.Options);
         }

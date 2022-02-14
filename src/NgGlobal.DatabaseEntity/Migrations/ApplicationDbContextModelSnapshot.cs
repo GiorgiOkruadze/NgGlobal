@@ -571,13 +571,13 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f50f5de7-ac08-4e82-ab56-d2ff0b37028f",
+                            ConcurrencyStamp = "cd98010b-266f-4f31-b725-a1c87cfcb345",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKprzTovC+HVVqlVeUZiZYi0DQknVaAEBZPe/XW4yQhCk/hAG1V3c+Zr1v0xF8kCPg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIU5LCMzhMZ39wnaOgLqRpRMW9Xz+0ctRmXoXRXK3Ull92OGREgKXaUIo9fQ0hIGdQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -617,15 +617,15 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "907696f2-3753-446b-9da3-723995dda4c4",
-                            Name = "admin",
+                            ConcurrencyStamp = "a9bb1054-6004-48fb-8c27-a8b469f739a4",
+                            Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "3da8902b-29a7-425b-a330-9390a9269427",
-                            Name = "customer",
+                            ConcurrencyStamp = "ca71f879-b40e-4448-98e8-30d1f2a918d9",
+                            Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
                 });

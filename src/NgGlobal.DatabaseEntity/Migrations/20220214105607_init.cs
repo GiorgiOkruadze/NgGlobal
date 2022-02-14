@@ -23,6 +23,25 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CarMails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Year = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CarMark = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CarModel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarMails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CompanyInfos",
                 columns: table => new
                 {
@@ -44,8 +63,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -57,8 +75,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -76,6 +93,23 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Languages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Mails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReasonForEnquiry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,6 +155,48 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CompanyServiceImage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyServiceId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyServiceImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompanyServiceImage_CompanyServices_CompanyServiceId",
+                        column: x => x.CompanyServiceId,
+                        principalTable: "CompanyServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DailyDatasetImage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DailyDatasetId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyDatasetImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DailyDatasetImage_DailyDatasets_DailyDatasetId",
+                        column: x => x.DailyDatasetId,
+                        principalTable: "DailyDatasets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -273,7 +349,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarId = table.Column<int>(type: "int", nullable: true),
                     IsMainImage = table.Column<bool>(type: "bit", nullable: false),
-                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -287,7 +364,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "translations",
+                name: "Translations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -307,69 +384,69 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_translations", x => x.Id);
+                    table.PrimaryKey("PK_Translations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_translations_Cars_DriveTrainId",
+                        name: "FK_Translations_Cars_DriveTrainId",
                         column: x => x.DriveTrainId,
                         principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_Cars_FuelTypeId",
+                        name: "FK_Translations_Cars_FuelTypeId",
                         column: x => x.FuelTypeId,
                         principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_Cars_TransmissionId",
+                        name: "FK_Translations_Cars_TransmissionId",
                         column: x => x.TransmissionId,
                         principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_CompanyInfos_AddressId",
+                        name: "FK_Translations_CompanyInfos_AddressId",
                         column: x => x.AddressId,
                         principalTable: "CompanyInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_CompanyServices_CompanyServiceLongDescriptionId",
+                        name: "FK_Translations_CompanyServices_CompanyServiceLongDescriptionId",
                         column: x => x.CompanyServiceLongDescriptionId,
                         principalTable: "CompanyServices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_CompanyServices_CompanyServiceShortDescriptionId",
+                        name: "FK_Translations_CompanyServices_CompanyServiceShortDescriptionId",
                         column: x => x.CompanyServiceShortDescriptionId,
                         principalTable: "CompanyServices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_CompanyServices_CompanyServiceTitleId",
+                        name: "FK_Translations_CompanyServices_CompanyServiceTitleId",
                         column: x => x.CompanyServiceTitleId,
                         principalTable: "CompanyServices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_DailyDatasets_CompanyServiceLongDescriptionId",
-                        column: x => x.CompanyServiceLongDescriptionId,
+                        name: "FK_Translations_DailyDatasets_DailyDatasetLongDescriptionId",
+                        column: x => x.DailyDatasetLongDescriptionId,
                         principalTable: "DailyDatasets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_DailyDatasets_CompanyServiceShortDescriptionId",
-                        column: x => x.CompanyServiceShortDescriptionId,
+                        name: "FK_Translations_DailyDatasets_DailyDatasetShortDescriptionId",
+                        column: x => x.DailyDatasetShortDescriptionId,
                         principalTable: "DailyDatasets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_DailyDatasets_CompanyServiceTitleId",
-                        column: x => x.CompanyServiceTitleId,
+                        name: "FK_Translations_DailyDatasets_DailyDatasetTitleId",
+                        column: x => x.DailyDatasetTitleId,
                         principalTable: "DailyDatasets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_translations_Languages_LanguageId",
+                        name: "FK_Translations_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
                         principalColumn: "Id",
@@ -419,9 +496,26 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CompanyServiceImage_CompanyServiceId",
+                table: "CompanyServiceImage",
+                column: "CompanyServiceId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contracts_Id",
+                table: "Contracts",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Contracts_UserId",
                 table: "Contracts",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DailyDatasetImage_DailyDatasetId",
+                table: "DailyDatasetImage",
+                column: "DailyDatasetId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_CarId",
@@ -429,43 +523,68 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_AddressId",
-                table: "translations",
+                name: "IX_Images_Id",
+                table: "Images",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Languages_Id",
+                table: "Languages",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_AddressId",
+                table: "Translations",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_CompanyServiceLongDescriptionId",
-                table: "translations",
+                name: "IX_Translations_CompanyServiceLongDescriptionId",
+                table: "Translations",
                 column: "CompanyServiceLongDescriptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_CompanyServiceShortDescriptionId",
-                table: "translations",
+                name: "IX_Translations_CompanyServiceShortDescriptionId",
+                table: "Translations",
                 column: "CompanyServiceShortDescriptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_CompanyServiceTitleId",
-                table: "translations",
+                name: "IX_Translations_CompanyServiceTitleId",
+                table: "Translations",
                 column: "CompanyServiceTitleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_DriveTrainId",
-                table: "translations",
+                name: "IX_Translations_DailyDatasetLongDescriptionId",
+                table: "Translations",
+                column: "DailyDatasetLongDescriptionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_DailyDatasetShortDescriptionId",
+                table: "Translations",
+                column: "DailyDatasetShortDescriptionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_DailyDatasetTitleId",
+                table: "Translations",
+                column: "DailyDatasetTitleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_DriveTrainId",
+                table: "Translations",
                 column: "DriveTrainId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_FuelTypeId",
-                table: "translations",
+                name: "IX_Translations_FuelTypeId",
+                table: "Translations",
                 column: "FuelTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_LanguageId",
-                table: "translations",
+                name: "IX_Translations_LanguageId",
+                table: "Translations",
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_translations_TransmissionId",
-                table: "translations",
+                name: "IX_Translations_TransmissionId",
+                table: "Translations",
                 column: "TransmissionId");
 
             migrationBuilder.CreateIndex(
@@ -499,13 +618,25 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CarMails");
+
+            migrationBuilder.DropTable(
+                name: "CompanyServiceImage");
+
+            migrationBuilder.DropTable(
                 name: "Contracts");
+
+            migrationBuilder.DropTable(
+                name: "DailyDatasetImage");
 
             migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
-                name: "translations");
+                name: "Mails");
+
+            migrationBuilder.DropTable(
+                name: "Translations");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

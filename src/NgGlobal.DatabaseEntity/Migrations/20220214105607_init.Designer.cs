@@ -10,8 +10,8 @@ using NgGlobal.DatabaseEntity.DB;
 namespace NgGlobal.DatabaseEntity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220210155731_changesInConfiguration")]
-    partial class changesInConfiguration
+    [Migration("20220214105607_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,6 +163,39 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("NgGlobal.DatabaseModels.Models.CarInfoMail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CarMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CarModel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Year")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarMails");
+                });
+
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.CompanyInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -197,12 +230,33 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImageName")
+                    b.HasKey("Id");
+
+                    b.ToTable("CompanyServices");
+                });
+
+            modelBuilder.Entity("NgGlobal.DatabaseModels.Models.CompanyServiceImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyServices");
+                    b.HasIndex("CompanyServiceId")
+                        .IsUnique();
+
+                    b.ToTable("CompanyServiceImage");
                 });
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Contract", b =>
@@ -258,12 +312,33 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImageName")
+                    b.HasKey("Id");
+
+                    b.ToTable("DailyDatasets");
+                });
+
+            modelBuilder.Entity("NgGlobal.DatabaseModels.Models.DailyDatasetImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DailyDatasetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DailyDatasets");
+                    b.HasIndex("DailyDatasetId")
+                        .IsUnique();
+
+                    b.ToTable("DailyDatasetImage");
                 });
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Image", b =>
@@ -281,6 +356,9 @@ namespace NgGlobal.DatabaseEntity.Migrations
 
                     b.Property<bool>("IsMainImage")
                         .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -318,6 +396,33 @@ namespace NgGlobal.DatabaseEntity.Migrations
                             Id = 2,
                             LanguageCode = "ka"
                         });
+                });
+
+            modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Mail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReasonForEnquiry")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mails");
                 });
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Translation", b =>
@@ -372,6 +477,12 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     b.HasIndex("CompanyServiceShortDescriptionId");
 
                     b.HasIndex("CompanyServiceTitleId");
+
+                    b.HasIndex("DailyDatasetLongDescriptionId");
+
+                    b.HasIndex("DailyDatasetShortDescriptionId");
+
+                    b.HasIndex("DailyDatasetTitleId");
 
                     b.HasIndex("DriveTrainId");
 
@@ -540,6 +651,17 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NgGlobal.DatabaseModels.Models.CompanyServiceImage", b =>
+                {
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", "CompanyService")
+                        .WithOne("Image")
+                        .HasForeignKey("NgGlobal.DatabaseModels.Models.CompanyServiceImage", "CompanyServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CompanyService");
+                });
+
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Contract", b =>
                 {
                     b.HasOne("NgGlobal.DatabaseModels.Models.User", null)
@@ -547,6 +669,17 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NgGlobal.DatabaseModels.Models.DailyDatasetImage", b =>
+                {
+                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", "DailyDataset")
+                        .WithOne("Image")
+                        .HasForeignKey("NgGlobal.DatabaseModels.Models.DailyDatasetImage", "DailyDatasetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DailyDataset");
                 });
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.Image", b =>
@@ -567,25 +700,25 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .WithMany("LongDescriptionTranslations")
                         .HasForeignKey("CompanyServiceLongDescriptionId");
 
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
+                        .WithMany("ShortDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceShortDescriptionId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
+                        .WithMany("TitleTranslations")
+                        .HasForeignKey("CompanyServiceTitleId");
+
                     b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
                         .WithMany("LongDescriptionTranslations")
-                        .HasForeignKey("CompanyServiceLongDescriptionId");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
-                        .WithMany("ShortDescriptionTranslations")
-                        .HasForeignKey("CompanyServiceShortDescriptionId");
+                        .HasForeignKey("DailyDatasetLongDescriptionId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
                         .WithMany("ShortDescriptionTranslations")
-                        .HasForeignKey("CompanyServiceShortDescriptionId");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
-                        .WithMany("TitleTranslations")
-                        .HasForeignKey("CompanyServiceTitleId");
+                        .HasForeignKey("DailyDatasetShortDescriptionId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
                         .WithMany("TitleTranslations")
-                        .HasForeignKey("CompanyServiceTitleId");
+                        .HasForeignKey("DailyDatasetTitleId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.Car", null)
                         .WithMany("DriveTrainTranslations")
@@ -626,6 +759,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.CompanyService", b =>
                 {
+                    b.Navigation("Image");
+
                     b.Navigation("LongDescriptionTranslations");
 
                     b.Navigation("ShortDescriptionTranslations");
@@ -635,6 +770,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
 
             modelBuilder.Entity("NgGlobal.DatabaseModels.Models.DailyDataset", b =>
                 {
+                    b.Navigation("Image");
+
                     b.Navigation("LongDescriptionTranslations");
 
                     b.Navigation("ShortDescriptionTranslations");

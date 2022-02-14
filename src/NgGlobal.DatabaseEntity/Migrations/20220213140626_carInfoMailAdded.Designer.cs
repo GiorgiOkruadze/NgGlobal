@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NgGlobal.DatabaseEntity.DB;
 
 namespace NgGlobal.DatabaseEntity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220213140626_carInfoMailAdded")]
+    partial class carInfoMailAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -313,6 +315,9 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("DailyDatasets");
@@ -478,12 +483,6 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     b.HasIndex("CompanyServiceShortDescriptionId");
 
                     b.HasIndex("CompanyServiceTitleId");
-
-                    b.HasIndex("DailyDatasetLongDescriptionId");
-
-                    b.HasIndex("DailyDatasetShortDescriptionId");
-
-                    b.HasIndex("DailyDatasetTitleId");
 
                     b.HasIndex("DriveTrainId");
 
@@ -701,7 +700,15 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .WithMany("LongDescriptionTranslations")
                         .HasForeignKey("CompanyServiceLongDescriptionId");
 
+                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
+                        .WithMany("LongDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceLongDescriptionId");
+
                     b.HasOne("NgGlobal.DatabaseModels.Models.CompanyService", null)
+                        .WithMany("ShortDescriptionTranslations")
+                        .HasForeignKey("CompanyServiceShortDescriptionId");
+
+                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
                         .WithMany("ShortDescriptionTranslations")
                         .HasForeignKey("CompanyServiceShortDescriptionId");
 
@@ -710,16 +717,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         .HasForeignKey("CompanyServiceTitleId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
-                        .WithMany("LongDescriptionTranslations")
-                        .HasForeignKey("DailyDatasetLongDescriptionId");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
-                        .WithMany("ShortDescriptionTranslations")
-                        .HasForeignKey("DailyDatasetShortDescriptionId");
-
-                    b.HasOne("NgGlobal.DatabaseModels.Models.DailyDataset", null)
                         .WithMany("TitleTranslations")
-                        .HasForeignKey("DailyDatasetTitleId");
+                        .HasForeignKey("CompanyServiceTitleId");
 
                     b.HasOne("NgGlobal.DatabaseModels.Models.Car", null)
                         .WithMany("DriveTrainTranslations")

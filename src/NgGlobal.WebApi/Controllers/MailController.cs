@@ -15,8 +15,17 @@ namespace NgGlobal.WebApp.ApiControllers
         public MailController(IMediator mediator) : base(mediator) { }
 
         // POST api/<CarController>
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] SentMailCommand request)
+        [HttpPost("/api/mail/sent")]
+        public async Task<IActionResult> SentMail([FromBody] SentMailCommand request)
+        {
+            if (request == null) { return BadRequest(ModelState); }
+
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPost("/api/mail/sentCarInfo")]
+        public async Task<IActionResult> SentCarMail([FromBody] SetMailAboutCarCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
 

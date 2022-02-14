@@ -1,7 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
+using NgGlobal.ApplicationServices.Extensions;
 using NgGlobal.ApplicationServices.Queries;
+using NgGlobal.WebApi.AuthorizeConstatnts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.WebApi.Controllers
 {
-  
+
     public class CompanyServiceController : BaseController
     {
         public CompanyServiceController(IMediator mediator) : base(mediator) { }
@@ -32,30 +35,33 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        // POST api/<CompanyServiceController>
+        [Authorize(Roles = UserType.Admin)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
+            request.ImageFile = request.ImageName.Base64ToImage();
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
-        // PUT api/<CompanyServiceController>/5
-        [HttpPut("{id}")]
+        [Authorize(Roles = UserType.Admin)]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCompanyServiceCommand request)
         {
+            request.Image = request.ImageName.Base64ToImage();
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
-        // DELETE api/<CompanyServiceController>/5
+        [Authorize(Roles = UserType.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+
             var response = await _mediator.Send(new DeleteCompanyServiceCommand() { DailyDatasetId = id });
             return Ok(response);
         }

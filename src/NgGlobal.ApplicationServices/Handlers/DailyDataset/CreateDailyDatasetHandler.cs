@@ -2,6 +2,7 @@
 using AutoMapper;
 using MediatR;
 using NgGlobal.ApplicationServices.Commands;
+using NgGlobal.ApplicationServices.FileStorageService;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
 using System;
@@ -14,18 +15,26 @@ namespace NgGlobal.ApplicationServices.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IRepository<DailyDataset> _dailyDatasetRepository = default;
-
-        public CreateDailyDatasetHandler(IMapper mapper, IRepository<DailyDataset> dailyDatasetRepository)
+        private readonly IMediaService _mediaService;
+        public CreateDailyDatasetHandler(IMapper mapper, IRepository<DailyDataset> dailyDatasetRepository, IMediaService mediaService)
         {
             _mapper = mapper;
             _dailyDatasetRepository = dailyDatasetRepository;
+            _mediaService = mediaService;
         }
 
         public async Task<bool> Handle(CreateDailyDatasetCommand request, CancellationToken cancellationToken)
         {
             try
             {
+                var cloudResult = await _mediaService.UploadImage(request.ImageFile);
                 var mappedDailyDataset = _mapper.Map<DailyDataset>(request);
+                mappedDailyDataset.Image = new DailyDatasetImage()
+                {
+                    ImageUrl = cloudResult.Url.AbsoluteUri,
+                    PublicId = cloudResult.PublicId
+                };
+
                 var response = await _dailyDatasetRepository.CreateAsync(mappedDailyDataset);
                 return response;
             }
@@ -34,5 +43,6 @@ namespace NgGlobal.ApplicationServices.Handlers
                 return false;
             }
         }
+
     }
 }

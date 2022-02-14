@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
+using NgGlobal.WebApi.AuthorizeConstatnts;
 using NgGlobal.WebApi.Controllers;
 using System.Threading.Tasks;
 
@@ -22,6 +24,15 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        [HttpPost("/api/Car/Filter")]
+        public async Task<IActionResult> FilterCars([FromBody]FilterCarsQuery request)
+        {
+            if (request == null) { return BadRequest(ModelState); }
+
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
         // GET api/<CarController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
@@ -30,7 +41,7 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
-        // POST api/<CarController>
+        [Authorize(Roles = UserType.Admin)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCarCommand request)
         {
@@ -40,7 +51,7 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
-        // PUT api/<CarController>/5
+        [Authorize(Roles = UserType.Admin)]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCarCommand request)
         {
@@ -51,7 +62,7 @@ namespace NgGlobal.WebApp.ApiControllers
 ;
         }
 
-        // DELETE api/<CarController>/5
+        [Authorize(Roles = UserType.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -59,6 +70,7 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        [Authorize(Roles = UserType.Admin)]
         [HttpPost(nameof(UploadCarImage))]
         public async Task<IActionResult> UploadCarImage([FromForm] CreateImageForCarCommand command)
         {

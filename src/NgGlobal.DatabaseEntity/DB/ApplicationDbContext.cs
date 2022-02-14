@@ -17,6 +17,7 @@ namespace NgGlobal.DatabaseEntity.DB
         public DbSet<DailyDatasetImage> DailyDatasetImage { get; set; }
         public DbSet<CompanyServiceImage> CompanyServiceImage { get; set; }
         public DbSet<Mail> Mails { get; set; }
+        public DbSet<CarInfoMail> CarInfoMails { get; set; }
 
         public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }

@@ -19,15 +19,15 @@ namespace NgGlobal.DatabaseEntity.Configurations
 
             builder.HasMany(tr => tr.TitleTranslations)
                  .WithOne()
-                 .HasForeignKey(tr => tr.CompanyServiceTitleId);
+                 .HasForeignKey(tr => tr.DailyDatasetTitleId);
 
             builder.HasMany(tr => tr.ShortDescriptionTranslations)
                 .WithOne()
-                .HasForeignKey(tr => tr.CompanyServiceShortDescriptionId);
+                .HasForeignKey(tr => tr.DailyDatasetShortDescriptionId);
 
             builder.HasMany(tr => tr.LongDescriptionTranslations)
                .WithOne()
-               .HasForeignKey(tr => tr.CompanyServiceLongDescriptionId);
+               .HasForeignKey(tr => tr.DailyDatasetLongDescriptionId);
 
             builder.HasOne(tr => tr.Image)
                 .WithOne(i => i.DailyDataset)

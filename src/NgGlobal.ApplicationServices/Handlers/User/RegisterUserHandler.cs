@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using NgGlobal.ApplicationServices.Commands;
+using NgGlobal.ApplicationShared.Constants;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
 using System.Threading;
@@ -10,10 +12,11 @@ namespace NgGlobal.ApplicationServices.Handlers
     public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, bool>
     {
         private readonly IUserRepository _userRepository = default;
-
-        public RegisterUserHandler(IUserRepository userRepository)
+        private readonly UserManager<User> _userManager;
+        public RegisterUserHandler(IUserRepository userRepository, UserManager<User> userManager)
         {
             _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         public async Task<bool> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -24,7 +27,12 @@ namespace NgGlobal.ApplicationServices.Handlers
                 Email = request.Email,
             };
 
-            return await _userRepository.RegistrationAsync(user,request.Password);
+            var result = await _userRepository.RegistrationAsync(user, request.Password);
+            await _userManager.AddToRoleAsync(user, UserType.Customer.ToString());
+
+            return result;
         }
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
+using NgGlobal.ApplicationServices.Commands.User;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.WebApi.Controllers;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.WebApp.ApiControllers
 {
-   
+
     public class UserController : BaseController
     {
         public UserController(IMediator mediator) : base(mediator) { }
@@ -37,5 +38,14 @@ namespace NgGlobal.WebApp.ApiControllers
 
             return Ok(token);
         }
+
+        [HttpPost(nameof(CreateRoleCommand))]
+        public async Task<IActionResult> CreateRole(CreateRoleCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok();
+        }
+
     }
 }

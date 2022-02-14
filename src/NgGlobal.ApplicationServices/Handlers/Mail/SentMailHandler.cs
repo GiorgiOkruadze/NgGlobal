@@ -3,6 +3,7 @@ using MailKit.Net.Smtp;
 using MediatR;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using MimeKit.Text;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.CoreServices.Repositories.Abstractions;
@@ -46,7 +47,13 @@ namespace NgGlobal.ApplicationServices.Handlers
                 message.From.Add(new MailboxAddress(model.Name, model.Email));
                 message.To.Add(new MailboxAddress("NgGLobal", "oqruadze1997@gmail.com"));
                 message.Subject = model.ReasonForEnquiry;
-                message.Body = new TextPart("plain") { Text = $"Sender phone : ${model.PhoneNumber}, ${model.Message}" };
+                message.Body = new TextPart(TextFormat.Html)
+                {
+                    Text = $"<ul>" +
+                        $"<li><b>Sender phone :</b> ${model.PhoneNumber}</li>" +
+                        $"<li><b>Message :</b> ${model.Message}</li>" +
+                    $"</ul>"
+                };
 
                 using (SmtpClient client = new())
                 {

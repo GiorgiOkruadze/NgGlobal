@@ -52,11 +52,11 @@ namespace NgGlobal.ApplicationServices.Handlers
                 message.Subject = "Cars";
                 message.Body = new TextPart(TextFormat.Html) { 
                     Text = $"<ul>" +
-                        $"<li>Full Name : ${model.FullName}</li>" +
-                        $"<li>Year : ${model.Year}</li>" +
-                        $"<li>Car Mark : ${model.CarMark}</li>" +
-                        $"<li>Car Model : ${model.CarModel}</li>" +
-                        $"<li>Message : ${model.Message}</li>" +
+                        $"<li><b>Full Name :</b> ${model.FullName}</li>" +
+                        $"<li><b>Year :</b> ${model.Year}</li>" +
+                        $"<li><b>Car Mark :</b> ${model.CarMark}</li>" +
+                        $"<li><b>Car Model :</b> ${model.CarModel}</li>" +
+                        $"<li><b>Message :</b> ${model.Message}</li>" +
                     $"</ul>" 
                 };
 

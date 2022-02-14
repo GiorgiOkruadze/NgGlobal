@@ -4,6 +4,7 @@ using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.FileStorageService;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +31,7 @@ namespace NgGlobal.ApplicationServices.Handlers
             var image = new Image()
             {
                 CarId = request.CarId,
-                ImageName = cloudResult.Url.AbsoluteUri,
+                ImageName = cloudResult.Url.AbsoluteUri.Split("/").LastOrDefault(),
                 PublicId = cloudResult.PublicId
             };
             return await _imageRepository.CreateAsync(image);

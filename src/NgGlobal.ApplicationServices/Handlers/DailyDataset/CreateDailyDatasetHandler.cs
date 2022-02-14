@@ -6,6 +6,7 @@ using NgGlobal.ApplicationServices.FileStorageService;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace NgGlobal.ApplicationServices.Handlers
                 var mappedDailyDataset = _mapper.Map<DailyDataset>(request);
                 mappedDailyDataset.Image = new DailyDatasetImage()
                 {
-                    ImageUrl = cloudResult.Url.AbsoluteUri,
+                    ImageUrl = cloudResult.Url.AbsoluteUri.Split("/").LastOrDefault(),
                     PublicId = cloudResult.PublicId
                 };
 

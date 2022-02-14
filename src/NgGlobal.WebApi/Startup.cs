@@ -93,7 +93,6 @@ namespace NgGlobal.WebApi
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowCredentials()
                        .AllowAnyHeader();
             }));
 

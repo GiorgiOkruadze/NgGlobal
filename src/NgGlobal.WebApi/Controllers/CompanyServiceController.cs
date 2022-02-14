@@ -35,11 +35,11 @@ namespace NgGlobal.WebApi.Controllers
             return Ok(response);
         }
 
-        [Authorize(Roles = UserType.Admin)]
+        /*[Authorize(Roles = UserType.Admin)]*/
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
-            request.ImageFile = request.ImageName.Base64ToImage();
+            request.ImageFile = request.ImageBaseUrl.Base64ToImage();
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);

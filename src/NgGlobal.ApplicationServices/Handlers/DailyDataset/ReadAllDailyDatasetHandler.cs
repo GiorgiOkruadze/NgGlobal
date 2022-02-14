@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Options;
 using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.ApplicationShared.DTOs;
@@ -17,10 +18,10 @@ namespace NgGlobal.ApplicationServices.Handlers
     internal class ReadAllDailyDatasetHandler : IRequestHandler<ReadAllDailyDatasetQuery, List<DailyDatasetDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ImageOption _imageOption = default;
+        private readonly IOptions<ImageOption> _imageOption = default;
         private readonly IRepository<DailyDataset> _dailyDatasetRepository = default;
 
-        public ReadAllDailyDatasetHandler(IMapper mapper, ImageOption imageOption, IRepository<DailyDataset> dailyDatasetRepository)
+        public ReadAllDailyDatasetHandler(IMapper mapper, IOptions<ImageOption> imageOption, IRepository<DailyDataset> dailyDatasetRepository)
         {
             _mapper = mapper;
             _imageOption = imageOption;
@@ -44,7 +45,7 @@ namespace NgGlobal.ApplicationServices.Handlers
                 var mappedDailyDatasets = _mapper.Map<List<DailyDatasetDto>>(dailyDatasets);
                 mappedDailyDatasets.ForEach(item =>
                 {
-                    item.ImageName = _imageOption.Url + item.Image.ImageUrl;
+                    item.ImageName = _imageOption.Value.Url + item.Image.ImageUrl;
                 });
 
                 return mappedDailyDatasets;

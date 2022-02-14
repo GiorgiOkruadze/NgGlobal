@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Options;
 using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.ApplicationShared.DTOs;
@@ -17,10 +18,10 @@ namespace NgGlobal.ApplicationServices.Handlers
     internal class ReadAllCompanyServiceHandler : IRequestHandler<ReadAllCompanyServicesQuery, List<CompanyServiceDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ImageOption _imageOption = default;
+        private readonly IOptions<ImageOption> _imageOption = default;
         private readonly IRepository<CompanyService> _companyServiceRepository = default;
 
-        public ReadAllCompanyServiceHandler(IMapper mapper, ImageOption imageOption, IRepository<CompanyService> companyServiceRepository)
+        public ReadAllCompanyServiceHandler(IMapper mapper, IOptions<ImageOption> imageOption, IRepository<CompanyService> companyServiceRepository)
         {
             _mapper = mapper;
             _imageOption = imageOption;
@@ -29,7 +30,9 @@ namespace NgGlobal.ApplicationServices.Handlers
 
         public async Task<List<CompanyServiceDto>> Handle(ReadAllCompanyServicesQuery request, CancellationToken cancellationToken)
         {
-            var companyServices = await _companyServiceRepository.GetAllAsync(new List<string>()
+            try
+            {
+                var companyServices = await _companyServiceRepository.GetAllAsync(new List<string>()
             {
                 "TitleTranslations",
                 "TitleTranslations.Language",
@@ -39,12 +42,16 @@ namespace NgGlobal.ApplicationServices.Handlers
                 "LongDescriptionTranslations.Language",
                 "Image"
             });
-            var mappedCompanyServices = _mapper.Map<List<CompanyServiceDto>>(companyServices);
-            mappedCompanyServices.ForEach(item =>
+                var mappedCompanyServices = _mapper.Map<List<CompanyServiceDto>>(companyServices);
+                mappedCompanyServices.ForEach(item =>
+                {
+                    item.ImageName = _imageOption.Value.Url + item.Image.ImageUrl;
+                });
+                return mappedCompanyServices;
+            }catch(Exception ex)
             {
-                item.ImageName = _imageOption.Url + item.Image.ImageUrl;
-            });
-            return mappedCompanyServices;
+                return null;
+            }
         }
     }
 }

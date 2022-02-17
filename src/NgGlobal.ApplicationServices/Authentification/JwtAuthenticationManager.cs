@@ -23,8 +23,6 @@ namespace NgGlobal.ApplicationServices.Authentication.Authentication
         {
             if (status)
             {
-               
-
                 var claims = new List<Claim>();
                 foreach (var role in roles)
                 {

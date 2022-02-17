@@ -7,6 +7,6 @@ namespace NgGlobal.ApplicationServices.Authentication.Abstraction
 {
     public interface IJwtAuthenticationManager
     {
-        string Authenticate(bool status, string email, List<string> roles);
+        string Authenticate(bool status,int userId, string email, string userName,List<string> roles);
     }
 }

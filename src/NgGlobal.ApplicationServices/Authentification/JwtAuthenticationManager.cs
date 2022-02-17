@@ -19,7 +19,7 @@ namespace NgGlobal.ApplicationServices.Authentication.Authentication
         }
 
 
-        public string Authenticate(bool status, string email,List<string> roles)
+        public string Authenticate(bool status, int userId, string email, string userName, List<string> roles)
         {
             if (status)
             {
@@ -30,7 +30,10 @@ namespace NgGlobal.ApplicationServices.Authentication.Authentication
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 }
-                claims.Add(new Claim(ClaimTypes.Name, email));
+                claims.Add(new Claim(ClaimTypes.Email, email));
+                claims.Add(new Claim(ClaimTypes.Name, userName));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, userId.ToString()));
+
 
                 var tokenKey = Encoding.ASCII.GetBytes(_key);
                 var tokenHandler = new JwtSecurityTokenHandler();

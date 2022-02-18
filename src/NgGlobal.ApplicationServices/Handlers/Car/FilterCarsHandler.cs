@@ -38,7 +38,7 @@ namespace NgGlobal.ApplicationServices.Handlers
             });
 
             var filteredCars = cars
-                ?.WhereIf(!string.IsNullOrEmpty(request.Manufacture),o => o.Manufacture == request.Manufacture)
+                ?.WhereIf(!string.IsNullOrEmpty(request.Manufacture),o => o.Manufacturer == request.Manufacture)
                 ?.WhereIf(!string.IsNullOrEmpty(request.Model), o => o.Model == request.Model)
                 ?.Where(o => DateTime.Compare(request.YearFrom, o.Year) >= 0 && DateTime.Compare(o.Year,request.YearTo) >= 0)
                 ?.WhereIf(request.MileFrom!=null, o=> o.Mile>=request.MileFrom)

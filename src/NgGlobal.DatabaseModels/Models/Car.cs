@@ -6,7 +6,7 @@ namespace NgGlobal.DatabaseModels.Models
     public class Car:BaseEntity
     {
         public int UserId { get; set; }
-        public string Manufacture { get; set; }
+        public string Manufacturer { get; set; }
         public string Model { get; set; }
         public DateTime Year { get; set; }
         public List<Translation> DriveTrainTranslations { get; set; }

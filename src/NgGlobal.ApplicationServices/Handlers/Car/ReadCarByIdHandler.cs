@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Options;
+using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.ApplicationShared.DTOs;
 using NgGlobal.CoreServices.Repositories.Abstractions;
@@ -16,11 +18,13 @@ namespace NgGlobal.ApplicationServices.Handlers
     internal class ReadCarByIdHandler : IRequestHandler<ReadCarByIdQuery, CarDto>
     {
         private readonly IMapper _mapper;
+        private readonly IOptions<ImageOption> _imageOption = default;
         private readonly IRepository<Car> _carRepository = default;
 
-        public ReadCarByIdHandler(IMapper mapper, IRepository<Car> carRepository)
+        public ReadCarByIdHandler(IMapper mapper, IOptions<ImageOption> imageOption, IRepository<Car> carRepository)
         {
             _mapper = mapper;
+            _imageOption = imageOption;
             _carRepository = carRepository;
         }
 
@@ -39,7 +43,12 @@ namespace NgGlobal.ApplicationServices.Handlers
                     "Images"
                 });
 
-            return _mapper.Map<CarDto>(car);
+            var mappedCar = _mapper.Map<CarDto>(car);
+            mappedCar.Images.ForEach(image =>
+            {
+                image.ImageName = _imageOption.Value.Url + image.ImageName;
+            });
+            return mappedCar;
         }
     }
 }

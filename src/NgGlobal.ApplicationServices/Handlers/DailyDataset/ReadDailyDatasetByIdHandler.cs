@@ -31,15 +31,15 @@ namespace NgGlobal.ApplicationServices.Handlers
             try
             {
                 var dailyDataset = await _dailyDatasetRepository.GetOneAsync(o => o.Id == request.DailyDatasetId, new List<string>()
-            {
-                "TitleTranslations",
-                "TitleTranslations.Language",
-                "ShortDescriptionTranslations",
-                "ShortDescriptionTranslations.Language",
-                "LongDescriptionTranslations",
-                "LongDescriptionTranslations.Language",
-                "Image"
-            });
+                {
+                    "TitleTranslations",
+                    "TitleTranslations.Language",
+                    "ShortDescriptionTranslations",
+                    "ShortDescriptionTranslations.Language",
+                    "LongDescriptionTranslations",
+                    "LongDescriptionTranslations.Language",
+                    "Image"
+                });
                 var mappedDailyDataset = _mapper.Map<DailyDatasetDto>(dailyDataset);
                 mappedDailyDataset.ImageName = _imageOption.Value.Url + mappedDailyDataset.Image.ImageUrl;
                 return mappedDailyDataset;

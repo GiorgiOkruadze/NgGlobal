@@ -49,7 +49,7 @@ namespace NgGlobal.WebApp.ApiControllers
                 return Unauthorized();
             }
 
-            return Ok(token);
+            return Ok(new {jwt=token});
         }
 
         [HttpPost(nameof(CreateRoleCommand))]

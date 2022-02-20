@@ -20,7 +20,6 @@ namespace NgGlobal.WebApi.Controllers
 
         // GET: api/<CarController>
         [HttpGet]
-        [Authorize(Roles = UserType.Admin)]
         public async Task<IActionResult> Get()
         {
             var response = await _mediator.Send(new ReadAllCompanyServicesQuery());

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NgGlobal.ApplicationServices.Commands;
+using NgGlobal.ApplicationServices.Services.Abstractions;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
 using System;
@@ -14,11 +15,11 @@ namespace NgGlobal.ApplicationServices.Handlers
     public class DeleteCarHandler : IRequestHandler<DeleteCarCommand,bool>
     {
         private readonly IRepository<Car> _carRepository = default;
-        private readonly IRepository<Translation> _translationRepository = default;
+        private readonly ITranslationService _translationService = default;
 
-        public DeleteCarHandler(IMapper mapper, IRepository<Translation> translationRepository, IRepository<Car> carRepository)
+        public DeleteCarHandler(IMapper mapper, ITranslationService translationService, IRepository<Car> carRepository)
         {
-            _translationRepository = translationRepository;
+            _translationService = translationService;
             _carRepository = carRepository;
         }
 
@@ -40,18 +41,8 @@ namespace NgGlobal.ApplicationServices.Handlers
             var translationids = car.DriveTrainTranslations.Select(o => o.Id).ToList();
             translationids.AddRange(car.FuelTypeTranslations.Select(o => o.Id));
             translationids.AddRange(car.TransmissionTranslations.Select(o => o.Id));
-            await DeleteTranslationsAsync(translationids);
+            await _translationService.DeleteTranslationsAsync(translationids);
             return await _carRepository.DeleteAsync(request.CarId);
-        }
-
-        public async Task<bool> DeleteTranslationsAsync(List<int> ids)
-        {
-            foreach(var item in ids)
-            {
-                await _translationRepository.DeleteAsync(item);
-            }
-
-            return true;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace NgGlobal.WebApi.Controllers
         }
 
         [Authorize(Roles = UserType.Admin)]
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCompanyInfoCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }

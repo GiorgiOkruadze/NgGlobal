@@ -51,7 +51,11 @@ namespace NgGlobal.WebApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCompanyServiceCommand request)
         {
-            request.Image = request.ImageName.Base64ToImage();
+            try
+            {
+                request.Image = request.ImageBaseUrl.Base64ToImage();
+            }
+            catch (Exception ex) { }
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);

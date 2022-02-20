@@ -25,7 +25,7 @@ namespace NgGlobal.ApplicationServices.Handlers
         public async Task<bool> Handle(DeleteCompanyInfoCommand request, CancellationToken cancellationToken)
         {
             var companyInfo = await _companyInfoRepository
-                .GetOneAsync(o => o.Id == request.CompanyInfoId, new List<string>() { "AddressTranslations", "AddressTranslations.Language" });
+                .GetOneAsync(o => o.Id == request.CompanyInfoId, new List<string>() { "AddressTranslations" });
 
             await _translationService.DeleteTranslationsAsync(companyInfo.AddressTranslations.Select(o => o.Id));
             return await _companyInfoRepository.DeleteAsync(request.CompanyInfoId);

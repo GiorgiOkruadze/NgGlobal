@@ -29,14 +29,18 @@ namespace NgGlobal.ApplicationServices.Handlers
         {
             try
             {
-                var result = await _mediaService.UploadImage(request.Image);
-
                 var mappedDailyDataset = _mapper.Map<CompanyService>(request);
-                mappedDailyDataset.Image = new CompanyServiceImage()
+
+                if (request.Image != null)
                 {
-                    ImageUrl = result.Url.AbsoluteUri.Split("/").LastOrDefault(),
-                    PublicId = result.PublicId
-                };
+                    var result = await _mediaService.UploadImage(request.Image);
+                    mappedDailyDataset.Image = new CompanyServiceImage()
+                    {
+                        ImageUrl = result.Url.AbsoluteUri.Split("/").LastOrDefault(),
+                        PublicId = result.PublicId
+                    };
+                }
+                
                 var response = await _companyServiceRepository.UpdateAsync(mappedDailyDataset.Id, mappedDailyDataset);
                 return response;
             }

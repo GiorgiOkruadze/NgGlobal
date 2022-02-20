@@ -10,5 +10,6 @@ namespace NgGlobal.ApplicationServices.Commands
     public class ImageSetAsMainCommand : IRequest<bool>
     {
         public int ImageId { get; set; }
+        public int CarId { get; set; }
     }
 }

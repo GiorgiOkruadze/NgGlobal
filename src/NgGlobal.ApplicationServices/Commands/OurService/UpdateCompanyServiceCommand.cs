@@ -10,10 +10,11 @@ namespace NgGlobal.ApplicationServices.Commands
     {
         public int Id { get; set; }
         public string ImageBaseUrl { get; set; }
+        public int CompanyServiceImageId { get; set; }
         public List<TranslationDto> TitleTranslations { get; set; }
         public List<TranslationDto> ShortDescriptionTranslations { get; set; }
         public List<TranslationDto> LongDescriptionTranslations { get; set; }
         [JsonIgnore]
-        public IFormFile Image { get; set; }
+        public IFormFile ImageFile { get; set; }
     }
 }

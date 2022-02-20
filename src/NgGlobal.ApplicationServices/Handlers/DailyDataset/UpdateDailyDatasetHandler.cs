@@ -43,7 +43,7 @@ namespace NgGlobal.ApplicationServices.Handlers
                         DailyDatasetId = request.Id,
                         ImageUrl = result.Url.AbsoluteUri.Split("/").LastOrDefault(),
                         PublicId = result.PublicId,
-                        Id = request.dailyDatasetImageId
+                        Id = request.DailyDatasetImageId
                     };
                 }
                 

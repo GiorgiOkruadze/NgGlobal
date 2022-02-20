@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using CloudinaryDotNet.Actions;
 using MediatR;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.FileStorageService;
@@ -29,15 +30,21 @@ namespace NgGlobal.ApplicationServices.Handlers
         {
             try
             {
+                ImageUploadResult result = null;
+                if (request.ImageFile != null)
+                {
+                    result = await _mediaService.UploadImage(request.ImageFile);
+                }
                 var mappedDailyDataset = _mapper.Map<CompanyService>(request);
 
-                if (request.Image != null)
+                if (request.ImageFile != null)
                 {
-                    var result = await _mediaService.UploadImage(request.Image);
                     mappedDailyDataset.Image = new CompanyServiceImage()
                     {
                         ImageUrl = result.Url.AbsoluteUri.Split("/").LastOrDefault(),
-                        PublicId = result.PublicId
+                        PublicId = result.PublicId,
+                        CompanyServiceId = request.Id,
+                        Id = request.CompanyServiceImageId
                     };
                 }
                 

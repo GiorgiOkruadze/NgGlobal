@@ -52,7 +52,7 @@ namespace NgGlobal.WebApi.Controllers
         {
             try
             {
-                request.Image = request.ImageBaseUrl.Base64ToImage();
+                request.ImageFile = request.ImageBaseUrl.Base64ToImage();
             }
             catch (Exception ex) { }
             if (request == null) { return BadRequest(ModelState); }

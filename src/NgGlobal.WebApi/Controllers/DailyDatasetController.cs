@@ -51,10 +51,15 @@ namespace NgGlobal.WebApi.Controllers
         }
 
         [Authorize(Roles = UserType.Admin)]
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateDailyDatasetCommand request)
         {
-            request.Image = request.ImageBaseUrl.Base64ToImage();
+            try
+            {
+                request.ImageFile = request.ImageBaseUrl.Base64ToImage();
+            }
+            catch (Exception ex) { }
+
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);

@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using CloudinaryDotNet.Actions;
 using MediatR;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.FileStorageService;
@@ -29,14 +30,23 @@ namespace NgGlobal.ApplicationServices.Handlers
         {
             try
             {
-                var result = await _mediaService.UploadImage(request.Image);
-
-                var mappedDailyDataset = _mapper.Map<DailyDataset>(request);
-                mappedDailyDataset.Image = new DailyDatasetImage()
+                ImageUploadResult result = null;
+                if (request.ImageFile != null)
                 {
-                    ImageUrl = result.Url.AbsoluteUri.Split("/").LastOrDefault(),
-                    PublicId = result.PublicId
-                };
+                    result = await _mediaService.UploadImage(request.ImageFile);
+                }
+                var mappedDailyDataset = _mapper.Map<DailyDataset>(request);
+                if (result != null)
+                {
+                    mappedDailyDataset.Image = new DailyDatasetImage()
+                    {
+                        DailyDatasetId = request.Id,
+                        ImageUrl = result.Url.AbsoluteUri.Split("/").LastOrDefault(),
+                        PublicId = result.PublicId,
+                        Id = request.dailyDatasetImageId
+                    };
+                }
+                
                 var response = await _dailyDatasetRepository.UpdateAsync(mappedDailyDataset.Id, mappedDailyDataset);
                 return response;
             }

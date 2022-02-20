@@ -30,11 +30,8 @@ namespace NgGlobal.ApplicationServices.Handlers
                 new List<string>()
                 {
                     "DriveTrainTranslations",
-                    "DriveTrainTranslations.Language",
                     "FuelTypeTranslations",
-                    "FuelTypeTranslations.Language",
                     "TransmissionTranslations",
-                    "TransmissionTranslations.Language",
                     "Images"
                 });
 

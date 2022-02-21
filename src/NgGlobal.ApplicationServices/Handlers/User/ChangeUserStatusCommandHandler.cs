@@ -1,11 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using NgGlobal.ApplicationServices.Commands.User;
+using NgGlobal.DatabaseModels.Constants;
 using NgGlobal.DatabaseModels.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,8 +21,7 @@ namespace NgGlobal.ApplicationServices.Handlers.Users
         public async Task<bool> Handle(ChangeUserStatusCommand request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            user.Status = request.Status;
-
+            user.Status = user.Status == UserStatus.Activated ? UserStatus.Deactivated : UserStatus.Activated;
             var result = await _userManager.UpdateAsync(user);
 
             return result.Succeeded;

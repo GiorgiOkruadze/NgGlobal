@@ -16,6 +16,7 @@ namespace NgGlobal.ApplicationServices.Mapper
 
             CreateMap<User, UserDto>()
                 .ForMember(dt => dt.Cars, db => db.MapFrom(o => o.Cars))
+                .ForMember(dt => dt.UserStatus, db => db.MapFrom(o => o.Status))
                 .ForMember(dt => dt.Contracts, db => db.MapFrom(o => o.Contracts))
                 .ReverseMap();
 

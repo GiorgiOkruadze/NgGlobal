@@ -10,6 +10,8 @@ namespace NgGlobal.ApplicationShared.DTOs
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+
+        public int UserStatus { get; set; }
         public string Email { get; set; }
         public List<CarDto> Cars { get; set; }
         public List<ContractDto> Contracts { get; set; }

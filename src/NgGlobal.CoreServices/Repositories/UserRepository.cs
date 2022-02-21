@@ -5,6 +5,7 @@ using NgGlobal.DatabaseModels.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NgGlobal.CoreServices.Extensions;
+using System.Linq;
 
 namespace NgGlobal.CoreServices.Repositories.Abstractions
 {
@@ -29,6 +30,11 @@ namespace NgGlobal.CoreServices.Repositories.Abstractions
         public async Task<User> GetUserAsync(int id, List<string> includes = null)
         {
             return await _userEntity.IncludeAll(includes).SingleOrDefaultAsync(o => o.Id == id);
+        }
+
+        public async Task<List<User>> GetUserByEmailAsync(string email)
+        {
+            return await _userEntity.Where(o => o.Email.Contains(email)).ToListAsync();
         }
 
         public async Task<bool> DeleteUserAsync(int id)

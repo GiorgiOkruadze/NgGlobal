@@ -11,5 +11,6 @@ namespace NgGlobal.CoreServices.Repositories.Abstractions
         Task<bool> DeleteUserAsync(int id);
         Task<List<User>> GetAllUsersAsync(List<string> includes);
         Task<User> GetUserAsync(int id, List<string> includes);
+        Task<List<User>> GetUserByEmailAsync(string email);
     }
 }

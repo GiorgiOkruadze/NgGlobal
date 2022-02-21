@@ -31,7 +31,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpGet]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/get/{id}")]
-        public async Task<IActionResult> getUserById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
             var response = await _mediator.Send(new GetUserByIdQuery() { Id = id }); ;
             return Ok(response);
@@ -67,6 +67,17 @@ namespace NgGlobal.WebApp.ApiControllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserType.Admin)]
+        [Route("/api/user/getByEmail")]
+        public async Task<IActionResult> GetByEmail([FromBody] GetUserByEmailCommand request)
+        {
+            if (request == null) { return BadRequest(ModelState); }
+
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPost]
         [Route("/api/User/LogIn")]
         public async Task<IActionResult> LogIn([FromBody] LogInUserCommand item)
         {
@@ -89,6 +100,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
 
         [HttpPost(nameof(ChangeUserStatus))]
+        [Authorize(Roles = UserType.Admin)]
         public async Task<IActionResult> ChangeUserStatus(ChangeUserStatusCommand command)
         {
             var result = await _mediator.Send(command);

@@ -14,6 +14,11 @@ namespace NgGlobal.ApplicationServices.Mapper
         {
             CreateMap<Language, LanguageDto>().ReverseMap();
 
+            CreateMap<User, UserDto>()
+                .ForMember(dt => dt.Cars, db => db.MapFrom(o => o.Cars))
+                .ForMember(dt => dt.Contracts, db => db.MapFrom(o => o.Contracts))
+                .ReverseMap();
+
             CreateMap<Translation,TranslationDto>()
                 .ForMember(dt => dt.Language, db => db.MapFrom(o => o.Language))
                 .ReverseMap();

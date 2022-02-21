@@ -29,13 +29,15 @@ namespace NgGlobal.ApplicationServices.Handlers
         {
             var cars = await _carRepository.GetAllAsync(new List<string>()
             {
-                "DriveTrainTranslations",
-                "DriveTrainTranslations.Language",
-                "FuelTypeTranslations",
-                "FuelTypeTranslations.Language",
-                "TransmissionTranslations",
-                "TransmissionTranslations.Language",
-                "Images"
+                "Contracts",
+                "Cars",
+                "Cars.DriveTrainTranslations",
+                "Cars.DriveTrainTranslations.Language",
+                "Cars.FuelTypeTranslations",
+                "Cars.FuelTypeTranslations.Language",
+                "Cars.TransmissionTranslations",
+                "Cars.TransmissionTranslations.Language",
+                "Cars.Images"
             });
             var mappedCars = _mapper.Map<List<CarDto>>(cars);
             mappedCars.ForEach(carItem =>

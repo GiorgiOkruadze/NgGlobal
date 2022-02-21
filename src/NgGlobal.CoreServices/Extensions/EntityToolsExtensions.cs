@@ -9,7 +9,7 @@ namespace NgGlobal.CoreServices.Extensions
 {
     public static class EntityToolsExtensions
     {
-        public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<Expression<Func<T, object>>> includes) where T : BaseEntity
+        public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<Expression<Func<T, object>>> includes) where T : class
         {
             if(includes != null)
             {
@@ -23,7 +23,7 @@ namespace NgGlobal.CoreServices.Extensions
             return queryable;
         }
 
-        public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<string> includes) where T : BaseEntity
+        public static IQueryable<T> IncludeAll<T>(this IQueryable<T> queryable, List<string> includes) where T : class
         {
             if (includes != null)
             {

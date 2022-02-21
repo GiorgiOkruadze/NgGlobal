@@ -28,6 +28,24 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Authorize(Roles = UserType.Admin)]
+        [Route("/api/user/get/{id}")]
+        public async Task<IActionResult> getUserById(int id)
+        {
+            var response = await _mediator.Send(new GetUserByIdQuery() { Id=id});;
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = UserType.Admin)]
+        [Route("/api/user/getAll")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var response = await _mediator.Send(new ReadAllCarsQuery());
+            return Ok(response);
+        }
+
         [HttpPost]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/registerAdmin")]

@@ -25,6 +25,7 @@ namespace NgGlobal.ApplicationServices.Handlers
             {
                 UserName = request.UserName,
                 Email = request.Email,
+                Status = DatabaseModels.Constants.UserStatus.Activated
             };
 
             var result = await _userRepository.RegistrationAsync(user, request.Password);

@@ -26,8 +26,12 @@ namespace NgGlobal.ApplicationServices.Handlers
         {
             var result = await _userRepository.LogInAsync(request.Email, request.Password);
             var user = await _userManager.FindByEmailAsync(request.Email);
+
+            if (user.Status == DatabaseModels.Constants.UserStatus.Deactivated)
+                return string.Empty;
+
             var roles = await _userManager.GetRolesAsync(user);
-            return _authenticationManager.Authenticate(result,user.Id, request.Email ,user.UserName, roles.ToList());
+            return _authenticationManager.Authenticate(result, user.Id, request.Email, user.UserName, roles.ToList());
         }
     }
 }

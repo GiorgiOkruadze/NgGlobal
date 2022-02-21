@@ -33,7 +33,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [Route("/api/user/get/{id}")]
         public async Task<IActionResult> getUserById(int id)
         {
-            var response = await _mediator.Send(new GetUserByIdQuery() { Id=id});;
+            var response = await _mediator.Send(new GetUserByIdQuery() { Id = id }); ;
             return Ok(response);
         }
 
@@ -76,7 +76,7 @@ namespace NgGlobal.WebApp.ApiControllers
                 return Unauthorized();
             }
 
-            return Ok(new {jwt=token});
+            return Ok(new { jwt = token });
         }
 
         [HttpPost(nameof(CreateRoleCommand))]
@@ -85,6 +85,15 @@ namespace NgGlobal.WebApp.ApiControllers
             var result = await _mediator.Send(command);
 
             return Ok();
+        }
+
+
+        [HttpPost(nameof(ChangeUserStatus))]
+        public async Task<IActionResult> ChangeUserStatus(ChangeUserStatusCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
         }
 
     }

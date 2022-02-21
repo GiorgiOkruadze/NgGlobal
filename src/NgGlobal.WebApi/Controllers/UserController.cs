@@ -42,7 +42,16 @@ namespace NgGlobal.WebApp.ApiControllers
         [Route("/api/user/getAll")]
         public async Task<IActionResult> GetAllUsers()
         {
-            var response = await _mediator.Send(new ReadAllCarsQuery());
+            var response = await _mediator.Send(new ReadAllUsersQuery());
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = UserType.Admin)]
+        [Route("/api/user/getAllAdmins")]
+        public async Task<IActionResult> GetAllAdmins()
+        {
+            var response = await _mediator.Send(new ReadAllAdminsQuery());
             return Ok(response);
         }
 

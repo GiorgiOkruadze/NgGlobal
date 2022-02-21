@@ -26,13 +26,8 @@ namespace NgGlobal.ApplicationServices.Handlers
         {
             var user = await _userRepository.GetAllUsersAsync(new List<string>()
             {
-                "DriveTrainTranslations",
-                "DriveTrainTranslations.Language",
-                "FuelTypeTranslations",
-                "FuelTypeTranslations.Language",
-                "TransmissionTranslations",
-                "TransmissionTranslations.Language",
-                "Images"
+                "Contracts",
+                "Cars"
             });
 
             return _mapper.Map<List<UserDto>>(user);

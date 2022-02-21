@@ -37,6 +37,5 @@ namespace NgGlobal.ApplicationServices.Handlers
 
             return _mapper.Map<UserDto>(user);
         }
-    {
     }
 }

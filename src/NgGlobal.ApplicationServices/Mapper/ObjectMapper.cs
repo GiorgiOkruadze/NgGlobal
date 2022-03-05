@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Options;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.ConfigurationOptions;
+using NgGlobal.ApplicationServices.Paging;
+using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.ApplicationShared.DTOs;
 using NgGlobal.DatabaseModels.Models;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace NgGlobal.ApplicationServices.Mapper
         public ObjectMapper()
         {
             CreateMap<Language, LanguageDto>().ReverseMap();
+            CreateMap<PagingParams, ReadCarsByPagesQuery>().ReverseMap();
 
             CreateMap<User, UserDto>()
                 .ForMember(dt => dt.Cars, db => db.MapFrom(o => o.Cars))

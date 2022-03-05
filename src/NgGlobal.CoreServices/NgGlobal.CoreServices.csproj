@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NgGlobal.ApplicationShared\NgGlobal.ApplicationShared.csproj" />
     <ProjectReference Include="..\NgGlobal.DatabaseEntity\NgGlobal.DatabaseEntity.csproj" />
     <ProjectReference Include="..\NgGlobal.DatabaseModels\NgGlobal.DatabaseModels.csproj" />
   </ItemGroup>

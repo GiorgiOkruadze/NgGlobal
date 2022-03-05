@@ -33,6 +33,16 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        [HttpPost("/api/Car/PageByPage")]
+        public async Task<IActionResult> CarsPageByPage([FromBody] ReadCarsByPagesQuery request)
+        {
+            if (request == null) { return BadRequest(ModelState); }
+
+            var response = await _mediator.Send(request);
+            Response.Headers.Add("X-Pagination",response.Paging.ToJson());
+            return Ok(response);
+        }
+
         // GET api/<CarController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)

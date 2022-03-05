@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NgGlobal.ApplicationServices.Paging;
+using NgGlobal.ApplicationShared.Paging;
 using NgGlobal.CoreServices.Extensions;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseEntity.DB;
@@ -74,6 +76,12 @@ namespace NgGlobal.CoreServices.Repositories
         public async Task<T> GetOneAsync(Expression<Func<T, bool>> filter = null, List<string> includes = null)
         {
             return await _entity?.IncludeAll(includes).FirstOrDefaultAsync(filter);
+        }
+
+        public PagedList<T> ReadPagedData(PagingParams pagingParams)
+        {
+            var query = _entity.AsQueryable();
+            return new PagedList<T>(query,pagingParams.PageNumber,pagingParams.PageSize);
         }
 
         public async Task<bool> SaveAsync()

@@ -51,7 +51,7 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("/api/Car/ByUser/{userId}")]
         public async Task<IActionResult> GetByUserId(int userId)
         {
             var response = await _mediator.Send(new ReadCarByUserIdQuery() { UserId = userId });

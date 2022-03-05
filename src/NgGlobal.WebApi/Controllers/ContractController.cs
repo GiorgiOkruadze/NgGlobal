@@ -32,6 +32,14 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        // GET api/<CarController>/5
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetByUserId(int userId)
+        {
+            var response = await _mediator.Send(new ReadContractByUserIdQuery() { UserId = userId });
+            return Ok(response);
+        }
+
         [Authorize(Roles = UserType.Admin)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateContractCommand request)

@@ -30,7 +30,7 @@ namespace NgGlobal.ApplicationServices.Handlers
 
         public async Task<CarDto> Handle(ReadCarByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var car = await _carRepository.GetOneAsync(
+            var car = await _carRepository.GetAsync(
                 o => o.UserId == request.UserId,
                 new List<string>() 
                 {

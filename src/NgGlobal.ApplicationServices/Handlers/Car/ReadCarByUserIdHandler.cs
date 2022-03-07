@@ -15,22 +15,22 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Handlers
 {
-    internal class ReadCarByUserIdHandler : IRequestHandler<ReadCarByUserIdQuery, CarDto>
+    internal class ReadCarsByUserIdHandler : IRequestHandler<ReadCarsByUserIdQuery, List<CarDto>>
     {
         private readonly IMapper _mapper;
         private readonly IOptions<ImageOption> _imageOption = default;
         private readonly IRepository<Car> _carRepository = default;
 
-        public ReadCarByUserIdHandler(IMapper mapper, IOptions<ImageOption> imageOption, IRepository<Car> carRepository)
+        public ReadCarsByUserIdHandler(IMapper mapper, IOptions<ImageOption> imageOption, IRepository<Car> carRepository)
         {
             _mapper = mapper;
             _imageOption = imageOption;
             _carRepository = carRepository;
         }
 
-        public async Task<CarDto> Handle(ReadCarByUserIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<CarDto>> Handle(ReadCarsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var car = await _carRepository.GetAsync(
+            var cars = await _carRepository.GetAsync(
                 o => o.UserId == request.UserId,
                 new List<string>() 
                 {
@@ -43,12 +43,15 @@ namespace NgGlobal.ApplicationServices.Handlers
                     "Images"
                 });
 
-            var mappedCar = _mapper.Map<CarDto>(car);
-            mappedCar.Images.ForEach(image =>
+            var mappedCars = _mapper.Map<List<CarDto>>(cars);
+            mappedCars.ForEach(carItem =>
             {
-                image.ImageName = _imageOption.Value.Url + image.ImageName;
+                carItem.Images.ForEach(image =>
+                {
+                    image.ImageName = _imageOption.Value.Url + image.ImageName;
+                });
             });
-            return mappedCar;
+            return mappedCars;
         }
     }
 }

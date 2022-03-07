@@ -32,11 +32,10 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
-        // GET api/<CarController>/5
-        [HttpGet("/api/Car/ByUser/{userId}")]
+        [HttpGet("/api/Contract/ByUser/{userId}")]
         public async Task<IActionResult> GetByUserId(int userId)
         {
-            var response = await _mediator.Send(new ReadContractByUserIdQuery() { UserId = userId });
+            var response = await _mediator.Send(new ReadContractsByUserIdQuery() { UserId = userId });
             return Ok(response);
         }
 

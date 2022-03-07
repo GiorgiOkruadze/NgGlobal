@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Queries
 {
-    public class ReadCarByUserIdQuery : IRequest<CarDto>
+    public class ReadCarsByUserIdQuery : IRequest<List<CarDto>>
     {
         public int UserId { get; set; } 
     }

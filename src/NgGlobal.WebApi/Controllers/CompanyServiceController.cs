@@ -20,7 +20,16 @@ namespace NgGlobal.WebApi.Controllers
 
         // GET: api/<CarController>
         [HttpGet]
+        [ApiVersion("2.0")]
         public async Task<IActionResult> Get()
+        {
+            var response = await _mediator.Send(new ReadAllCompanyServicesQuery());
+            return Ok(response);
+        }
+
+        [HttpGet("/api/CompanyService/Read")]
+        [MapToApiVersion("1")]
+        public async Task<IActionResult> GetAllCompanyInfo()
         {
             var response = await _mediator.Send(new ReadAllCompanyServicesQuery());
             return Ok(response);
@@ -28,6 +37,8 @@ namespace NgGlobal.WebApi.Controllers
 
         // GET api/<CompanyServiceController>/5
         [HttpGet("{id}")]
+        [MapToApiVersion("2")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> Get(int id)
         {
             var response = await _mediator.Send(new ReadCompanyServiceByIdQuery() { CompanyServiceId = id });
@@ -37,6 +48,7 @@ namespace NgGlobal.WebApi.Controllers
         /*[Authorize(Roles = UserType.Admin)]*/
         [HttpPost]
         [Authorize(Roles = UserType.Admin)]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Post([FromBody] CreateCompanyServiceCommand request)
         {
             request.ImageFile = request.ImageBaseUrl.Base64ToImage();
@@ -48,6 +60,7 @@ namespace NgGlobal.WebApi.Controllers
 
         [Authorize(Roles = UserType.Admin)]
         [HttpPut]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Put([FromBody] UpdateCompanyServiceCommand request)
         {
             try
@@ -63,6 +76,7 @@ namespace NgGlobal.WebApi.Controllers
 
         [Authorize(Roles = UserType.Admin)]
         [HttpDelete("{id}")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Delete(int id)
         {
 

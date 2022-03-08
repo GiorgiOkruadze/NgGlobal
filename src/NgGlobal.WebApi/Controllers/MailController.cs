@@ -16,6 +16,8 @@ namespace NgGlobal.WebApp.ApiControllers
 
         // POST api/<CarController>
         [HttpPost("/api/mail/sent")]
+        [ApiVersion("2.0")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> SentMail([FromBody] SentMailCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
@@ -25,6 +27,8 @@ namespace NgGlobal.WebApp.ApiControllers
         }
 
         [HttpPost("/api/mail/sentCarInfo")]
+        [ApiVersion("2.0")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> SentCarMail([FromBody] SetMailAboutCarCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }

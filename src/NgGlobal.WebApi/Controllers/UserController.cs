@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.WebApp.ApiControllers
 {
-
     public class UserController : BaseController
     {
         public UserController(IMediator mediator) : base(mediator) { }
@@ -20,6 +19,7 @@ namespace NgGlobal.WebApp.ApiControllers
         // POST api/<CarController>
         [HttpPost]
         [Route("/api/user/registerUser")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
@@ -31,6 +31,8 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpGet]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/get/{id}")]
+        [MapToApiVersion("2")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var response = await _mediator.Send(new GetUserByIdQuery() { Id = id }); ;
@@ -40,6 +42,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpGet]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/getAll")]
+        [ApiVersion("2.0")]
         public async Task<IActionResult> GetAllUsers()
         {
             var response = await _mediator.Send(new ReadAllUsersQuery());
@@ -49,6 +52,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpGet]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/getAllAdmins")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> GetAllAdmins()
         {
             var response = await _mediator.Send(new ReadAllAdminsQuery());
@@ -58,6 +62,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpPost]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/registerAdmin")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterAdminCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
@@ -69,6 +74,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [HttpPost]
         [Authorize(Roles = UserType.Admin)]
         [Route("/api/user/getByEmail")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> GetByEmail([FromBody] GetUserByEmailCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
@@ -79,6 +85,8 @@ namespace NgGlobal.WebApp.ApiControllers
 
         [HttpPost]
         [Route("/api/User/LogIn")]
+        [MapToApiVersion("2")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> LogIn([FromBody] LogInUserCommand item)
         {
             var token = await _mediator.Send(item);
@@ -91,6 +99,7 @@ namespace NgGlobal.WebApp.ApiControllers
         }
 
         [HttpPost(nameof(CreateRoleCommand))]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> CreateRole(CreateRoleCommand command)
         {
             var result = await _mediator.Send(command);
@@ -101,6 +110,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
         [HttpPost(nameof(ChangeUserStatus))]
         [Authorize(Roles = UserType.Admin)]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> ChangeUserStatus(ChangeUserStatusCommand command)
         {
             var result = await _mediator.Send(command);

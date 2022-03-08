@@ -13,23 +13,23 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Handlers
 {
-    public class RealAllCompanyInfoCommand : IRequestHandler<RealAllCompanyInfoQuery, List<CompanyInfoDto>>
+    public class ReadCompanyInfoHandler : IRequestHandler<GetCompanyInfoQuery, CompanyInfoDto>
     {
         private readonly IMapper _mapper;
         private readonly IRepository<CompanyInfo> _companyInfoRepository = default;
 
-        public RealAllCompanyInfoCommand(IMapper mapper, IRepository<CompanyInfo> companyInfoRepository)
+        public ReadCompanyInfoHandler(IMapper mapper, IRepository<CompanyInfo> companyInfoRepository)
         {
             _mapper = mapper;
             _companyInfoRepository = companyInfoRepository;
         }
 
-        public async Task<List<CompanyInfoDto>> Handle(RealAllCompanyInfoQuery request, CancellationToken cancellationToken)
+        public async Task<CompanyInfoDto> Handle(GetCompanyInfoQuery request, CancellationToken cancellationToken)
         {
-            var companyInfo = await _companyInfoRepository
-                .GetAllAsync(new List<string>() { "AddressTranslations", "AddressTranslations.Language" });
+            var companyInfo = (await _companyInfoRepository
+                .GetAllAsync(new List<string>() { "AddressTranslations", "AddressTranslations.Language" })).FirstOrDefault();
 
-            return _mapper.Map<List<CompanyInfoDto>>(companyInfo);
+            return _mapper.Map<CompanyInfoDto>(companyInfo);
         }
     }
 }

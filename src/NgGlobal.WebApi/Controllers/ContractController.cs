@@ -18,6 +18,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
         // GET: api/<CarController>
         [HttpGet]
+        [ApiVersion("2.0")]
         public async Task<IActionResult> Get()
         {
             var response = await _mediator.Send(new ReadAllContractsQuery());
@@ -26,6 +27,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
         // GET api/<CarController>/5
         [HttpGet("{id}")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Get(int id)
         {
             var response = await _mediator.Send(new ReadContractByIdQuery() { ContractId = id});
@@ -33,6 +35,7 @@ namespace NgGlobal.WebApp.ApiControllers
         }
 
         [HttpGet("/api/Contract/ByUser/{userId}")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> GetByUserId(int userId)
         {
             var response = await _mediator.Send(new ReadContractsByUserIdQuery() { UserId = userId });
@@ -41,6 +44,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
         [Authorize(Roles = UserType.Admin)]
         [HttpPost]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Post([FromBody] CreateContractCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
@@ -51,6 +55,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
         [Authorize(Roles = UserType.Admin)]
         [HttpPut]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Put([FromBody] UpdateContractCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }
@@ -62,6 +67,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
         [Authorize(Roles = UserType.Admin)]
         [HttpDelete("{id}")]
+        [MapToApiVersion("2")]
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _mediator.Send(new DeleteContractCommand() { ContractId = id });

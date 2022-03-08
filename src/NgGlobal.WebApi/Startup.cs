@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NgGlobal.ApplicationServices.Authentication.Abstraction;
@@ -23,7 +24,12 @@ using NgGlobal.CoreServices.Repositories;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseEntity.DB;
 using NgGlobal.DatabaseModels.Models;
+using NgGlobal.WebApi.SwaggerConfiguration;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace NgGlobal.WebApi
@@ -46,13 +52,13 @@ namespace NgGlobal.WebApi
             });
 
             #region Paging
-            /*services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<IUrlHelper>(factory =>    
-              {    
-                  var actionContext = factory.GetService<IActionContextAccessor>()    
-                                             .ActionContext;    
-                  return new UrlHelper(actionContext);    
-              });   */
+            //services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            //services.AddScoped<IUrlHelper>(factory =>
+            //  {
+            //      var actionContext = factory.GetService<IActionContextAccessor>()
+            //                                 .ActionContext;
+            //      return new UrlHelper(actionContext);
+            //  });
             #endregion
 
             #region UserAndRole
@@ -112,9 +118,24 @@ namespace NgGlobal.WebApi
             }));
 
             services.AddControllers();
+
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(2, 0);
+            });
+
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigureOptions>();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NgGlobal.WebApi", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
@@ -149,9 +170,16 @@ namespace NgGlobal.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
+            app.UseSwagger(options =>
+            {
+                options.PreSerializeFilters.Add((swagger, req) =>
+                {
+                    swagger.Servers = new List<OpenApiServer>() { new OpenApiServer() { Url = $"https://{req.Host}" } };
+                });
+            });
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "NgGlobal.WebApi v1");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "NgGlobal.WebApi v2");
             });
 
             app.UseHttpsRedirection();

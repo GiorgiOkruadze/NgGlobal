@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.WebApp.ApiControllers
 {
-   
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ImageController : BaseController
     {
         public ImageController(IMediator mediator) : base(mediator) { }

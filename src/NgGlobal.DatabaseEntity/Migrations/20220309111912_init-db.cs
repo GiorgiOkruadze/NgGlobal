@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NgGlobal.DatabaseEntity.Migrations
 {
-    public partial class init : Migration
+    public partial class initdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -118,6 +118,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -293,7 +294,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    Manufacture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Year = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Mile = table.Column<double>(type: "float", nullable: false),
@@ -458,8 +459,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "a9bb1054-6004-48fb-8c27-a8b469f739a4", "Admin", "ADMIN" },
-                    { 2, "ca71f879-b40e-4448-98e8-30d1f2a918d9", "Customer", "CUSTOMER" }
+                    { 1, "2eb9007b-bcbc-4604-b53a-d2609ed2ba0d", "Admin", "ADMIN" },
+                    { 2, "ff50b676-7a0e-44f2-ab15-29c07a9af912", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -473,8 +474,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "cd98010b-266f-4f31-b725-a1c87cfcb345", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEIU5LCMzhMZ39wnaOgLqRpRMW9Xz+0ctRmXoXRXK3Ull92OGREgKXaUIo9fQ0hIGdQ==", null, false, "", false, "admin" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "235700f7-ee21-402f-9072-9201394221ec", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEA5XLm3TqlBbjuQ5Asqso7zHuSGmp/vmLUBAy7a5ZVy4frwAPT82b0K4KV6sSHguGA==", null, false, "", 0, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

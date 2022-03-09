@@ -19,7 +19,7 @@ namespace NgGlobal.WebApp.ApiControllers
         // POST api/<CarController>
         [HttpPost]
         [Route("/api/user/registerUser")]
-        [MapToApiVersion("2")]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserCommand request)
         {
             if (request == null) { return BadRequest(ModelState); }

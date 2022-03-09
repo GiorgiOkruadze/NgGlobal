@@ -574,13 +574,13 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f279feb7-9f8e-4454-928f-ff7ff597be22",
+                            ConcurrencyStamp = "235700f7-ee21-402f-9072-9201394221ec",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENs9K6zugHlNu+S4CxXsRhpyPyiO2eUkaCdthC20/OtkYKJivTQcP0YPZZDgWm9LDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA5XLm3TqlBbjuQ5Asqso7zHuSGmp/vmLUBAy7a5ZVy4frwAPT82b0K4KV6sSHguGA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             Status = 0,
@@ -621,14 +621,14 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "9fb50c19-b19a-4087-bf0d-f20e8e3294ef",
+                            ConcurrencyStamp = "2eb9007b-bcbc-4604-b53a-d2609ed2ba0d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "0f0f1368-5f99-4f31-860a-7eb0db401394",
+                            ConcurrencyStamp = "ff50b676-7a0e-44f2-ab15-29c07a9af912",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

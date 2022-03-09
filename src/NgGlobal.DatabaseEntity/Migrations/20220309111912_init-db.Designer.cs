@@ -10,8 +10,8 @@ using NgGlobal.DatabaseEntity.DB;
 namespace NgGlobal.DatabaseEntity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220218225014_carModelPropertyChanged")]
-    partial class carModelPropertyChanged
+    [Migration("20220309111912_init-db")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -549,6 +549,9 @@ namespace NgGlobal.DatabaseEntity.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -573,15 +576,16 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae8b4163-4f91-468a-b2ce-211b608a7f96",
+                            ConcurrencyStamp = "235700f7-ee21-402f-9072-9201394221ec",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAELrLX2Z04VtL2dsuuzPxydCdp8IuThyzTHRqpbIfaWmfdjr8f1CVpA1CpAiI6KQ1wA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA5XLm3TqlBbjuQ5Asqso7zHuSGmp/vmLUBAy7a5ZVy4frwAPT82b0K4KV6sSHguGA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
+                            Status = 0,
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -619,14 +623,14 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "7304b8f1-fae1-4fd9-86e4-c1b02a9a01f9",
+                            ConcurrencyStamp = "2eb9007b-bcbc-4604-b53a-d2609ed2ba0d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "4502ff54-892f-4cbd-b8c9-9d0391f7ac28",
+                            ConcurrencyStamp = "ff50b676-7a0e-44f2-ab15-29c07a9af912",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

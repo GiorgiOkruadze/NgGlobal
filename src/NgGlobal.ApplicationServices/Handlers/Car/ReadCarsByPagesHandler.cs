@@ -33,7 +33,17 @@ namespace NgGlobal.ApplicationServices.Handlers
 
         public async Task<PagingOutput<CarDto>> Handle(ReadCarsByPagesQuery request, CancellationToken cancellationToken)
         {
-            var model = _carRepository.ReadPagedData(_mapper.Map<PagingParams>(request));
+            var model = _carRepository.ReadPagedData(_mapper.Map<PagingParams>(request), new List<string>()
+            {
+                "DriveTrainTranslations",
+                "DriveTrainTranslations.Language",
+                "FuelTypeTranslations",
+                "FuelTypeTranslations.Language",
+                "TransmissionTranslations",
+                "TransmissionTranslations.Language",
+                "Images"
+            });
+
             var outputModel = new PagingOutput<CarDto>
             {
                 Paging = model.GetHeader(),

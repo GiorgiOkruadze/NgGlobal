@@ -1,16 +1,20 @@
 ﻿using MediatR;
 using NgGlobal.ApplicationShared.DTOs;
+using NgGlobal.ApplicationShared.Paging;
 using System;
 using System.Collections.Generic;
 
 namespace NgGlobal.ApplicationServices.Queries
 {
-    public class FilterCarsQuery:IRequest<List<CarDto>>
+    public class FilterCarsQuery:IRequest<PagingOutput<CarDto>>
     {
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 20;
+
         public string Manufacture { get; set; }
         public string Model { get; set; }
-        public DateTime YearFrom { get; set; }
-        public DateTime YearTo { get; set; }
+        public DateTime? YearFrom { get; set; }
+        public DateTime? YearTo { get; set; }
         public double? MileFrom { get; set; }
         public double? MileTo { get; set; }
         public string FuelType { get; set; }

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Options;
+using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.ApplicationServices.Extensions;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.ApplicationShared.DTOs;
+using NgGlobal.ApplicationShared.Paging;
 using NgGlobal.CoreServices.Repositories.Abstractions;
 using NgGlobal.DatabaseModels.Models;
 using System;
@@ -13,20 +16,22 @@ using System.Threading.Tasks;
 
 namespace NgGlobal.ApplicationServices.Handlers
 {
-    public class FilterCarsHandler:IRequestHandler<FilterCarsQuery,List<CarDto>>
+    public class FilterCarsHandler:IRequestHandler<FilterCarsQuery, PagingOutput<CarDto>>
     {
         private readonly IMapper _mapper;
+        private readonly IOptions<ImageOption> _imageOption = default;
         private readonly IRepository<Car> _carRepository = default;
 
-        public FilterCarsHandler(IMapper mapper, IRepository<Car> carRepository)
+        public FilterCarsHandler(IMapper mapper, IRepository<Car> carRepository, IOptions<ImageOption> imageOption)
         {
             _mapper = mapper;
+            _imageOption = imageOption;
             _carRepository = carRepository;
         }
 
-        public async Task<List<CarDto>> Handle(FilterCarsQuery request, CancellationToken cancellationToken)
-        {
-            var cars = await _carRepository.GetAllAsync(new List<string>()
+        public async Task<PagingOutput<CarDto>> Handle(FilterCarsQuery request, CancellationToken cancellationToken)
+        { 
+            var query = _carRepository.GetAsQuerable(new List<string>()
             {
                 "DriveTrainTranslations",
                 "DriveTrainTranslations.Language",
@@ -35,21 +40,34 @@ namespace NgGlobal.ApplicationServices.Handlers
                 "TransmissionTranslations",
                 "TransmissionTranslations.Language",
                 "Images"
+            })
+                ?.WhereIf(!string.IsNullOrEmpty(request.Manufacture), o => o.Manufacturer == request.Manufacture)
+                ?.WhereIf(!string.IsNullOrEmpty(request.Model), o => o.Model == request.Model)
+                ?.WhereIf(request.YearFrom != null, o => DateTime.Compare((DateTime)request.YearFrom, o.Year) >= 0)
+                ?.WhereIf(request.YearTo != null, o => DateTime.Compare((DateTime)request.YearTo, o.Year) <= 0)
+                ?.WhereIf(request.MileFrom != null, o => o.Mile >= request.MileFrom)
+                ?.WhereIf(request.MileTo != null, o => o.Mile >= request.MileTo)
+                ?.WhereIf(!string.IsNullOrEmpty(request.FuelType), o => o.FuelTypeTranslations?.FirstOrDefault(fuel => fuel.LanguageId == 1).Text.ToLower() == request.FuelType.ToLower())
+                ?.WhereIf(request.PriceFrom != null, o => o.Mile >= request.PriceFrom)
+                ?.WhereIf(request.PriceTo != null, o => o.Mile >= request.PriceTo).AsQueryable();
+
+            var pagesData = new PagedList<Car>(query, request.PageNumber, request.PageSize);
+
+            var outputModel = new PagingOutput<CarDto>
+            {
+                Paging = pagesData.GetHeader(),
+                Items = pagesData.List.Select(m => _mapper.Map<CarDto>(m)).ToList(),
+            };
+
+            outputModel.Items.ForEach(carItem =>
+            {
+                carItem.Images.ForEach(image =>
+                {
+                    image.ImageName = _imageOption.Value.Url + image.ImageName;
+                });
             });
 
-            var filteredCars = cars
-                ?.WhereIf(!string.IsNullOrEmpty(request.Manufacture),o => o.Manufacturer == request.Manufacture)
-                ?.WhereIf(!string.IsNullOrEmpty(request.Model), o => o.Model == request.Model)
-                ?.Where(o => DateTime.Compare(request.YearFrom, o.Year) >= 0 && DateTime.Compare(o.Year,request.YearTo) >= 0)
-                ?.WhereIf(request.MileFrom!=null, o=> o.Mile>=request.MileFrom)
-                ?.WhereIf(request.MileTo != null, o => o.Mile >= request.MileTo)
-                ?.WhereIf(!string.IsNullOrEmpty(request.FuelType), o => o.FuelTypeTranslations?.FirstOrDefault(fuel => fuel.LanguageId==1).Text.ToLower() == request.FuelType.ToLower())
-                ?.WhereIf(request.PriceFrom != null, o => o.Mile >= request.PriceFrom)
-                ?.WhereIf(request.PriceTo != null, o => o.Mile >= request.PriceTo)
-                ?.ToList();
-
-            var mappedCars = _mapper.Map<List<CarDto>>(cars);
-            return mappedCars;
+            return outputModel;
         }
     }
 }

@@ -78,10 +78,15 @@ namespace NgGlobal.CoreServices.Repositories
             return await _entity?.IncludeAll(includes).FirstOrDefaultAsync(filter);
         }
 
-        public PagedList<T> ReadPagedData(PagingParams pagingParams)
+        public PagedList<T> ReadPagedData(PagingParams pagingParams, List<string> includes = null)
         {
-            var query = _entity.AsQueryable();
+            var query = _entity?.IncludeAll(includes).AsQueryable();
             return new PagedList<T>(query,pagingParams.PageNumber,pagingParams.PageSize);
+        }
+
+        public IQueryable<T> GetAsQuerable(List<string> includes = null)
+        {
+            return _entity?.IncludeAll(includes).AsQueryable();
         }
 
         public async Task<bool> SaveAsync()

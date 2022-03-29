@@ -5,6 +5,7 @@ using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
 using NgGlobal.WebApi.AuthorizeConstatnts;
 using NgGlobal.WebApi.Controllers;
+using System.Threading;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -73,6 +74,7 @@ namespace NgGlobal.WebApp.ApiControllers
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
+            Task.Run(() => { _mediator.Send(new WriteFiltersCommand()); });
             return Ok(response);
         }
 
@@ -84,6 +86,11 @@ namespace NgGlobal.WebApp.ApiControllers
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
+
+            Thread myNewThread = new Thread(() => _mediator.Send(new WriteFiltersCommand()));
+            myNewThread.IsBackground = true;
+            myNewThread.Start();
+
             return Ok(response)
 ;
         }
@@ -94,6 +101,7 @@ namespace NgGlobal.WebApp.ApiControllers
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _mediator.Send(new DeleteCarCommand() { CarId = id });
+            Task.Run(() => { _mediator.Send(new WriteFiltersCommand()); });
             return Ok(response);
         }
 

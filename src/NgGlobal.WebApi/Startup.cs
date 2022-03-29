@@ -19,6 +19,7 @@ using NgGlobal.ApplicationServices.ConfigurationOptions;
 using NgGlobal.ApplicationServices.FileStorageService;
 using NgGlobal.ApplicationServices.Mapper;
 using NgGlobal.ApplicationServices.Service;
+using NgGlobal.ApplicationServices.Services;
 using NgGlobal.ApplicationServices.Services.Abstractions;
 using NgGlobal.CoreServices.Repositories;
 using NgGlobal.CoreServices.Repositories.Abstractions;
@@ -109,6 +110,7 @@ namespace NgGlobal.WebApi
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMediaService, MediaService>();
             services.AddScoped<ITranslationService, TranslationService>();
+            services.AddScoped<IFileService, FileService>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

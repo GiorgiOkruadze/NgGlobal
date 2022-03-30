@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
+using NgGlobal.ApplicationServices.Services.Abstractions;
 using NgGlobal.WebApi.AuthorizeConstatnts;
 using NgGlobal.WebApi.Controllers;
 using System.Threading.Tasks;
@@ -14,25 +15,28 @@ namespace NgGlobal.WebApp.ApiControllers
    
     public class FilterController : BaseController
     {
-        public FilterController(IMediator mediator) : base(mediator) { }
+        private readonly IFilterService _fileService = default;
+
+        public FilterController(IMediator mediator, IFilterService fileService) : base(mediator) 
+        { 
+            _fileService= fileService;
+        }
 
         // GET: api/<CarController>
         [HttpGet]
         [MapToApiVersion("1")]
         public async Task<IActionResult> Get()
         {
-            var response = await _mediator.Send(new ReadFiltersQuery());
+            var response = await _fileService.ReadFilterAsync();
             return Ok(response);
         }
 
         [Authorize(Roles = UserType.Admin)]
         [HttpPost("/api/filter/generateFilterData")]
         [ApiVersion("2.0")]
-        public async Task<IActionResult> GenerateFiltersData([FromBody] WriteFiltersCommand request)
+        public async Task<IActionResult> GenerateFiltersData()
         {
-            if (request == null) { return BadRequest(ModelState); }
-
-            var response = await _mediator.Send(request);
+            var response = await _fileService.ReadFilterAsync();
             return Ok(response);
         }
     }

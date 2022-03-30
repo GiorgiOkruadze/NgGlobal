@@ -111,6 +111,7 @@ namespace NgGlobal.WebApi
             services.AddScoped<IMediaService, MediaService>();
             services.AddScoped<ITranslationService, TranslationService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IFilterService, FilterService>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

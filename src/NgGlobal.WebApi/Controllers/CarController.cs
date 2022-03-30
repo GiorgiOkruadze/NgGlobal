@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgGlobal.ApplicationServices.Commands;
 using NgGlobal.ApplicationServices.Queries;
+using NgGlobal.ApplicationServices.Services.Abstractions;
 using NgGlobal.WebApi.AuthorizeConstatnts;
 using NgGlobal.WebApi.Controllers;
 using System.Threading;
@@ -15,7 +16,12 @@ namespace NgGlobal.WebApp.ApiControllers
    
     public class CarController : BaseController
     {
-        public CarController(IMediator mediator) : base(mediator) { }
+        private readonly IFilterService _fileService = default;
+
+        public CarController(IMediator mediator, IFilterService fileService) : base(mediator) 
+        {
+            _fileService = fileService;
+        }
 
         // GET: api/<CarController>
         [HttpGet]
@@ -74,7 +80,8 @@ namespace NgGlobal.WebApp.ApiControllers
             if (request == null) { return BadRequest(ModelState); }
 
             var response = await _mediator.Send(request);
-            Task.Run(() => { _mediator.Send(new WriteFiltersCommand()); });
+            await _fileService.WriteFilterInFileAsync();
+
             return Ok(response);
         }
 
@@ -87,9 +94,7 @@ namespace NgGlobal.WebApp.ApiControllers
 
             var response = await _mediator.Send(request);
 
-            Thread myNewThread = new Thread(() => _mediator.Send(new WriteFiltersCommand()));
-            myNewThread.IsBackground = true;
-            myNewThread.Start();
+            await _fileService.WriteFilterInFileAsync();
 
             return Ok(response)
 ;
@@ -101,7 +106,9 @@ namespace NgGlobal.WebApp.ApiControllers
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _mediator.Send(new DeleteCarCommand() { CarId = id });
-            Task.Run(() => { _mediator.Send(new WriteFiltersCommand()); });
+
+            await _fileService.WriteFilterInFileAsync();
+
             return Ok(response);
         }
 

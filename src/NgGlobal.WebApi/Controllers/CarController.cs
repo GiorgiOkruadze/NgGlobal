@@ -32,6 +32,15 @@ namespace NgGlobal.WebApp.ApiControllers
             return Ok(response);
         }
 
+        // GET: api/<CarController>
+        [HttpGet("/api/Car/CarsOnTheWay")]
+        [MapToApiVersion("1")]
+        public async Task<IActionResult> CarsOnTheWay()
+        {
+            var response = await _mediator.Send(new GetCarsOnTheWayQuery());
+            return Ok(response);
+        }
+
         [HttpPost("/api/Car/Filter")]
         [MapToApiVersion("1")]
         public async Task<IActionResult> FilterCars([FromBody]FilterCarsQuery request)

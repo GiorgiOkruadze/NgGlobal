@@ -13,8 +13,8 @@ namespace NgGlobal.ApplicationServices.Queries
 
         public string Manufacture { get; set; }
         public string Model { get; set; }
-        public DateTime? YearFrom { get; set; }
-        public DateTime? YearTo { get; set; }
+        public int? YearFrom { get; set; }
+        public int? YearTo { get; set; }
         public double? MileFrom { get; set; }
         public double? MileTo { get; set; }
         public string FuelType { get; set; }

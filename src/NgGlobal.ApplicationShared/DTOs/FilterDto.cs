@@ -13,6 +13,7 @@ namespace NgGlobal.ApplicationShared.DTOs
         public int YearTo { get; set; }
         public List<string> FuelTypes { get; set; } = new List<string>();
         public List<string> Transmissions { get; set; } = new List<string>();
+        public List<string> Drivetrain { get; set; } = new List<string>();
         public double PriceFrom { get; set; }
         public double PriceTo { get; set; }
         public double MileageFrom { get; set; }

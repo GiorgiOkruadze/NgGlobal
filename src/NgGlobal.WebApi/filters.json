@@ -1,1 +1,1 @@
-{"MarksModels":{"audi":["q5"],"BMW":["e60"],"Mercede":["C300","e250"]},"YearFrom":2022,"YearTo":2022,"FuelTypes":[],"Transmissions":["transmission","ტრანსმისსიონ"],"PriceFrom":234234.0,"PriceTo":234234.0,"MileageFrom":123123.0,"MileageTo":234234234.0}
+{"MarksModels":{"audi":["q5"],"BMW":["e60"],"Mercede":["C300","e250","c240"]},"YearFrom":2010,"YearTo":2022,"FuelTypes":[],"Transmissions":[],"Drivetrain":["drive train","დრაივ თრეინ"],"PriceFrom":234234.0,"PriceTo":234234.0,"MileageFrom":123123.0,"MileageTo":234234234.0}

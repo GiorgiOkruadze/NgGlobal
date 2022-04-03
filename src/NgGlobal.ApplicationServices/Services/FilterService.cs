@@ -36,8 +36,6 @@ namespace NgGlobal.ApplicationServices.Services
             {
                 "DriveTrainTranslations",
                 "DriveTrainTranslations.Language",
-                "TransmissionTranslations",
-                "TransmissionTranslations.Language",
             })).ToList();
 
                 Task.Run(() =>
@@ -47,7 +45,7 @@ namespace NgGlobal.ApplicationServices.Services
                         MarksModels = cars.GroupBy(o => o.Manufacturer).ToDictionary(o => o.Key, o => o.Select(x => x.Model).ToList()),
                     YearFrom = cars.Min(o => o.Year).Year,
                         YearTo = cars.Max(o => o.Year).Year,
-                        Transmissions = cars.SelectMany(o => o.TransmissionTranslations.Where(o => o.LanguageId == 1).Select(t => t.Text)).Distinct().ToList(),
+                        Drivetrain = cars.SelectMany(o => o.DriveTrainTranslations.Where(o => o.LanguageId == 1).Select(t => t.Text)).Distinct().ToList(),
                         PriceFrom = cars.Min(o => o.Price),
                         PriceTo = cars.Max(o => o.Price),
                         MileageFrom = cars.Min(o => o.Mile),

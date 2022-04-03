@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NgGlobal.DatabaseEntity.Migrations
 {
-    public partial class initdb : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -459,8 +459,8 @@ namespace NgGlobal.DatabaseEntity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "2eb9007b-bcbc-4604-b53a-d2609ed2ba0d", "Admin", "ADMIN" },
-                    { 2, "ff50b676-7a0e-44f2-ab15-29c07a9af912", "Customer", "CUSTOMER" }
+                    { 1, "7b1ef593-b3d6-440a-848a-83d3c0f1b4e1", "Admin", "ADMIN" },
+                    { 2, "380610e1-cfb1-4770-8299-a28d7e29964b", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -475,7 +475,7 @@ namespace NgGlobal.DatabaseEntity.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "235700f7-ee21-402f-9072-9201394221ec", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEA5XLm3TqlBbjuQ5Asqso7zHuSGmp/vmLUBAy7a5ZVy4frwAPT82b0K4KV6sSHguGA==", null, false, "", 0, false, "admin" });
+                values: new object[] { 1, 0, "b2920396-598d-4990-aa73-beac25b81af2", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "admin", "AQAAAAEAACcQAAAAEBOMlgamHNUinnvgY3jrirZHNnkXXpPZKwfYeNHO52nV5a41+eWzUdrOAXtsRPfXtg==", null, false, "", 0, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

@@ -36,7 +36,7 @@ namespace NgGlobal.WebApp.ApiControllers
         [ApiVersion("2.0")]
         public async Task<IActionResult> GenerateFiltersData()
         {
-            var response = await _fileService.ReadFilterAsync();
+            var response = await _fileService.WriteFilterInFileAsync();
             return Ok(response);
         }
     }

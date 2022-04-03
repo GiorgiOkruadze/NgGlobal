@@ -40,14 +40,12 @@ namespace NgGlobal.ApplicationServices.Services
                 "TransmissionTranslations.Language",
             })).ToList();
 
-                await Task.Run(() =>
+                Task.Run(() =>
                 {
-                    var groupedDataByMark = cars.GroupBy(o => o.Manufacturer);
                     var filter = new FilterDto()
                     {
-                        Models = cars.Select(x => x.Model).Distinct().ToList(),
-                        Makes = cars.Select(x => x.Manufacturer).Distinct().ToList(),
-                        YearFrom = cars.Min(o => o.Year).Year,
+                        MarksModels = cars.GroupBy(o => o.Manufacturer).ToDictionary(o => o.Key, o => o.Select(x => x.Model).ToList()),
+                    YearFrom = cars.Min(o => o.Year).Year,
                         YearTo = cars.Max(o => o.Year).Year,
                         Transmissions = cars.SelectMany(o => o.TransmissionTranslations.Where(o => o.LanguageId == 1).Select(t => t.Text)).Distinct().ToList(),
                         PriceFrom = cars.Min(o => o.Price),

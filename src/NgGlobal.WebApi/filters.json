@@ -1,1 +1,1 @@
-{"Makes":["Mercede","BMW","toyota","opel","audi"],"Models":["C250","C63 amg","e60","camry","omega","q21"],"YearFrom":2006,"YearTo":2022,"FuelTypes":[],"Transmissions":["ტრანსმისსიონ","transmission","manual"],"PriceFrom":234234.0,"PriceTo":234234.0,"MileageFrom":123.0,"MileageTo":99999.0}
+{"MarksModels":{"audi":["q5"],"BMW":["e60"],"Mercede":["C300","e250"]},"YearFrom":2022,"YearTo":2022,"FuelTypes":[],"Transmissions":["transmission","ტრანსმისსიონ"],"PriceFrom":234234.0,"PriceTo":234234.0,"MileageFrom":123123.0,"MileageTo":234234234.0}

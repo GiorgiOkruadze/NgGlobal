@@ -8,8 +8,9 @@ namespace NgGlobal.ApplicationShared.DTOs
 {
     public class FilterDto
     {
-        public List<string> Makes { get; set; } = new List<string>();
-        public List<string> Models { get; set; } = new List<string>();
+       /* public List<string> Makes { get; set; } = new List<string>();
+        public List<string> Models { get; set; } = new List<string>();*/
+        public Dictionary<string, List<string>> MarksModels = new Dictionary<string, List<string>>();
         public int YearFrom { get; set; }
         public int YearTo { get; set; }
         public List<string> FuelTypes { get; set; } = new List<string>();

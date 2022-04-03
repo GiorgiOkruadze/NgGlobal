@@ -40,8 +40,9 @@ namespace NgGlobal.ApplicationServices.Services
                 "TransmissionTranslations.Language",
             })).ToList();
 
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
+                    var groupedDataByMark = cars.GroupBy(o => o.Manufacturer);
                     var filter = new FilterDto()
                     {
                         Models = cars.Select(x => x.Model).Distinct().ToList(),

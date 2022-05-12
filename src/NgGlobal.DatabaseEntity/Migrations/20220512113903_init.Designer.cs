@@ -10,7 +10,7 @@ using NgGlobal.DatabaseEntity.DB;
 namespace NgGlobal.DatabaseEntity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220403155119_init")]
+    [Migration("20220512113903_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -576,13 +576,13 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2920396-598d-4990-aa73-beac25b81af2",
+                            ConcurrencyStamp = "722ddccb-341a-4e48-a06e-02f157e8b5a4",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBOMlgamHNUinnvgY3jrirZHNnkXXpPZKwfYeNHO52nV5a41+eWzUdrOAXtsRPfXtg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGSSGRXKV4wqqGVFWEsaOyksgIHovQJnFWMUWJGBWjRUgo3GCfBasjVGbYmmW+NOXw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             Status = 0,
@@ -623,14 +623,14 @@ namespace NgGlobal.DatabaseEntity.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "7b1ef593-b3d6-440a-848a-83d3c0f1b4e1",
+                            ConcurrencyStamp = "880ec71f-9563-4a0d-a528-f83ae56171fd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "380610e1-cfb1-4770-8299-a28d7e29964b",
+                            ConcurrencyStamp = "2e90ef7d-d96b-442c-bfd3-a005d839c7c5",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
